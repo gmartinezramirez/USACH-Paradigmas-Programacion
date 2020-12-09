@@ -38,7 +38,21 @@ Implemente la resolución de los siguientes ejercicios en Java.
 
 ## Clase 3: Relaciones POO II 
 ### Ejercicio 1 Herencia (resolución en clases)
-* TODO
+* Herencia
+
+A. Una línea 2D tiene dos dimensiones, x e y. Haciendo uso de herencia, ¿cómo implementaría una línea 3D?
+
+B. Una línea se compone de dos puntos. Punto inicio y punto final. Primero implemente mediante composición la representación de una línea basada en la definición previamente escrita.  Luego, diseñe e implemente otra clase que contenga la representación de una línea, pero ahora utilizando herencia. Es decir, una línea hereda el comportamiento de un punto.
+
+Tip: cuando hacemos uso de composición, “una línea se compone de dos puntos”, pero cuando hacemos uso de herencia, “una línea es un punto extendido por otro punto”
 
 ### Ejercicio 2 Composición (resolución en clases)
-* TODO
+* Polimorfismo
+
+Implemente un programa que obtenga múltiples tipos de formas geométricas y su área, por ejemplo, el programa obtendrá figuras tales como, triángulo, rectángulo, etc. En primer lugar, debe implementar una superclase “Figura” que definirá el comportamiento de todas las figuras. Asuma que todas las figuras tienen un atributo en común, que en este caso será el color.
+
+Tip:
+
+Área rectángulo: largo*ancho
+
+Área triángulo: 0,5*base*altura
