@@ -1,11 +1,11 @@
-package com.paradigmas.compositionClassActivities;
+package com.paradigmas.AnalysisAndDesign;
 
-import com.paradigmas.compositionClassActivities.TDA.Movie;
-import com.paradigmas.compositionClassActivities.TDA.Reviewer;
+import com.paradigmas.AnalysisAndDesign.TDA.Movie;
+import com.paradigmas.AnalysisAndDesign.TDA.Reviewer;
 
 import java.util.List;
 
-public class CompositionProblem {
+public class AnalysisAndDesignActivity {
 
   public static void executeSolution() {
     Movie pelicula = new Movie("Matrix", "Wachoski", 3, "scifi", "PG", 60);

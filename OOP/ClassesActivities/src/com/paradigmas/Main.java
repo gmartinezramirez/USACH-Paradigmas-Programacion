@@ -1,10 +1,10 @@
 package com.paradigmas;
 
-import com.paradigmas.compositionClassActivities.CompositionProblem;
+import com.paradigmas.AnalysisAndDesign.AnalysisAndDesignActivity;
 
 public class Main {
 
   public static void main(String[] args) {
-    CompositionProblem.executeSolution();
+    AnalysisAndDesignActivity.executeSolution();
   }
 }
