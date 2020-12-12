@@ -1,4 +1,4 @@
-package com.paradigmas.AnalysisAndDesign.TDA;
+package com.paradigmas.TDA;
 
 public class Movie {
 

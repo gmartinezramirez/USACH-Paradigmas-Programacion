@@ -1,4 +1,4 @@
-package com.paradigmas.AnalysisAndDesign.TDA;
+package com.paradigmas.TDA;
 
 import java.util.List;
 
@@ -6,12 +6,12 @@ public class Reviewer {
 
   String name;
   String lastName;
-  List<Movie> peliculasCalificadas;
+  List<Movie> qualifiedMovies; //Peliculas calificadas
 
-  public Reviewer(String name, String lastName, List<Movie> peliculasCalificadas) {
+  public Reviewer(String name, String lastName, List<Movie> qualifiedMovies) {
     this.name = name;
     this.lastName = lastName;
-    this.peliculasCalificadas = peliculasCalificadas;
+    this.qualifiedMovies = qualifiedMovies;
   }
 
   public String getName() {
@@ -30,12 +30,12 @@ public class Reviewer {
     this.lastName = lastName;
   }
 
-  public List<Movie> getPeliculasCalificadas() {
-    return peliculasCalificadas;
+  public List<Movie> getQualifiedMovies() {
+    return qualifiedMovies;
   }
 
-  public void setPeliculasCalificadas(List<Movie> peliculasCalificadas) {
-    this.peliculasCalificadas = peliculasCalificadas;
+  public void setQualifiedMovies(List<Movie> anQualifiedMovies) {
+    this.qualifiedMovies = anQualifiedMovies;
   }
 
   @Override
@@ -47,8 +47,8 @@ public class Reviewer {
         + ", lastName='"
         + lastName
         + '\''
-        + ", peliculasCalificadas="
-        + peliculasCalificadas
+        + ", qualifiedMovies="
+        + qualifiedMovies
         + '}';
   }
 }
