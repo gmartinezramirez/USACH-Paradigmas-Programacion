@@ -1,8 +1,11 @@
 package com.paradigmas;
 
 import com.paradigmas.Service.AccountOperationService;
+import com.paradigmas.Service.IAccountOperations;
 import com.paradigmas.TDA.Account;
+import com.paradigmas.TDA.Cajero;
 import com.paradigmas.TDA.Client;
+import com.paradigmas.TDA.Employee;
 
 public class CouplingCohesion {
 
@@ -37,9 +40,30 @@ public class CouplingCohesion {
     // Toda la lógica que no es propia de un TDA, se agrupa en otro package. Por ejemplo
     // en este caso vamos a agrupar todo lo que sea manejo de dinero en la clase
     // AccountOperationService. Para esto instanciamos un objeto de esa clase y utilizamos sus métodos
-    AccountOperationService accountOperationService = new AccountOperationService();
+    //AccountOperationService accountOperationService = new AccountOperationService();
+
+    IAccountOperations accountOperationService = new AccountOperationService();
+    //     AccountOperationService accountOperationService = new AccountOperationService();
     accountOperationService.withdrawMoney(client1, 40);
 
     System.out.println(client1.getAccount().toString());
+
+    System.out.println(client1.getAccount().getCurrentMoney());
+    accountOperationService.addMoney(client1, 200);
+
+    System.out.println(client1.getAccount().getCurrentMoney());
+
+
+    //Employee
+    Employee cajero = new Cajero("cajero", 1804551);
+
+    cajero.setIncrementQuantityOfUserByDay();
+    System.out.println(cajero.getQuantityOfUsersByDay());
+
+    System.out.println(cajero.getQuantityOfUsersByDay());
+
+    cajero.setIncrementQuantityOfUserByDay();
+    System.out.println(cajero.getQuantityOfUsersByDay());
+
   }
 }

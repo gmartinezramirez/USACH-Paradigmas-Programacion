@@ -1,4 +1,4 @@
-package com.paradigmas.TDA;
+package paradigmas.TDA;
 
 public class Account {
 
