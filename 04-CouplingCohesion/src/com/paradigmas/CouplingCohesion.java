@@ -22,8 +22,17 @@ public class CouplingCohesion {
     System.out.println(account2.getId());
 
     Client client1 = new Client(account1, "gonzalom", "pass");
+    // Imprimimos el contenido del objeto
     System.out.println(client1.toString());
-    System.out.println(client1.getId());
+    // Armamos un mensaje a imprimir
+    String clientInfoMessage =
+        "Client1 tiene el siguiente ID: ".concat(String.valueOf(client1.getId()));
+
+    // Alternativa:
+    // String clientInfoMessage =
+    //        "Client1 tiene el siguiente ID: " + client1.getId();
+
+    System.out.println(clientInfoMessage);
 
     // Un cliente solo puede cambiar su password si esta activo
     client1.setActive();
@@ -39,8 +48,9 @@ public class CouplingCohesion {
     // llamado Service
     // Toda la lógica que no es propia de un TDA, se agrupa en otro package. Por ejemplo
     // en este caso vamos a agrupar todo lo que sea manejo de dinero en la clase
-    // AccountOperationService. Para esto instanciamos un objeto de esa clase y utilizamos sus métodos
-    //AccountOperationService accountOperationService = new AccountOperationService();
+    // AccountOperationService. Para esto instanciamos un objeto de esa clase y utilizamos sus
+    // métodos
+    // AccountOperationService accountOperationService = new AccountOperationService();
 
     IAccountOperations accountOperationService = new AccountOperationService();
     //     AccountOperationService accountOperationService = new AccountOperationService();
@@ -53,10 +63,11 @@ public class CouplingCohesion {
 
     System.out.println(client1.getAccount().getCurrentMoney());
 
-
-    //Employee
+    // Employee
     Employee cajero = new Cajero("cajero", 1804551);
 
+    // Cada vez que llamamos a este metodo, estaremos incrementando en 1 la cantidad de usuarios
+    // que ha atendido en un dia
     cajero.setIncrementQuantityOfUserByDay();
     System.out.println(cajero.getQuantityOfUsersByDay());
 
@@ -64,6 +75,5 @@ public class CouplingCohesion {
 
     cajero.setIncrementQuantityOfUserByDay();
     System.out.println(cajero.getQuantityOfUsersByDay());
-
   }
 }
