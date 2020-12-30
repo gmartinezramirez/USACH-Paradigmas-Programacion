@@ -1,5 +1,8 @@
 package paradigmas;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Generics {
 
   // Escriba una programa que refleje el comportamiento de una calculadora, con los métodos de suma,
@@ -14,5 +17,12 @@ public class Generics {
   public static void main(String[] args) {
 
     System.out.println("Hello Generics");
+    Calculadora calculadora = new Calculadora();
+    System.out.println(calculadora.add(1.0, 2));
+
+    List<Integer> aListOfIntegers = new ArrayList<>();
+    aListOfIntegers.add(1);
+    aListOfIntegers.add(9);
+    System.out.println(calculadora.sumAllNumbers(aListOfIntegers));
   }
 }
