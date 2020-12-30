@@ -6,7 +6,7 @@ import paradigmas.TDA.Dog;
 
 public class AbstractInterface {
 
-  public static void main(String args[]) {
+  public static void main(String[] args) {
     Animal dog = new Dog("mascota", 10);
 
     Cat cat = new Cat("gato");

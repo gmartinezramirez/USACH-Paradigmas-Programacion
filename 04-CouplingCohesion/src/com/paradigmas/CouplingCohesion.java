@@ -9,7 +9,7 @@ import com.paradigmas.TDA.Employee;
 
 public class CouplingCohesion {
 
-  public static void main(String args[]) {
+  public static void main(String[] args) {
 
     // Un cliente tiene asociada una cuenta
     // Pueden modificarlo de acuerdo a nuestra sesion anterior en donde vimos composicion

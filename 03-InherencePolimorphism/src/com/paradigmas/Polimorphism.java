@@ -5,7 +5,7 @@ import com.paradigmas.TDA.Rectangule;
 
 public class Polimorphism {
 
-  public static void main(String args[]) {
+  public static void main(String[] args) {
 
     Rectangule rectangule1 = new Rectangule("color", 1, 2); // Herencia
     Figure rectangule2 = new Rectangule("color", 1, 2); // Polimorfismo
