@@ -2,7 +2,8 @@ package com.paradigmas.TDA;
 
 public class Account {
 
-  private static int id;  // TODO: revisar static
+  private static int count;
+  private int id;
   private int accountNumber;
   private int currentMoney;
   private boolean isBlocked;
@@ -10,10 +11,10 @@ public class Account {
   public Account(int accountNumber, int currentMoney) {
     this.accountNumber = accountNumber;
     this.currentMoney = currentMoney;
-    setId(++id);
+    setId(++count);
   }
 
-  public static int getId() {
+  public int getId() {
     return id;
   }
 
