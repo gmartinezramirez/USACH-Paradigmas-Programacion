@@ -27,7 +27,7 @@ public class Shopping {
     System.out.println(shoppingListService.getTotalCost(articles));
 
     // Esto arroja exception
-    System.out.println(shoppingListService.getTotalCost(null));
+    //System.out.println(shoppingListService.getTotalCost(null));
 
     // Imprimir lista
     printListOfArticles(articles);
@@ -41,19 +41,17 @@ public class Shopping {
     articles.remove(article3);
     printListOfArticles(articles);
 
-    //String articleName = "article2";
-    //Article foundArticle = getArticleByName(articles, articleName);
-    //System.out.println("Articulo encontrado en la lista: ");
-    //System.out.println(foundArticle.toString());
+    // String articleName = "article2";
+    // Article foundArticle = getArticleByName(articles, articleName);
+    // System.out.println("Articulo encontrado en la lista: ");
+    // System.out.println(foundArticle.toString());
 
-    //Article notFoundArticle = getArticleByName(articles, "hola");
-    //System.out.println("Articulo encontrado en la lista: ");
-    //if (notFoundArticle != null) {
+    // Article notFoundArticle = getArticleByName(articles, "hola");
+    // System.out.println("Articulo encontrado en la lista: ");
+    // if (notFoundArticle != null) {
     //  System.out.println(notFoundArticle.toString());
-   // }
+    // }
   }
-
-
 
   private static void printListOfArticles(List<Article> articles) {
     System.out.println("Lista");

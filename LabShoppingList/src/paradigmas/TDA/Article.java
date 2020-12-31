@@ -37,14 +37,18 @@ public class Article {
     this.price = price;
   }
 
-
   @Override
   public String toString() {
-    return "Article{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", price=" + price +
-            ", quantity=" + quantity +
-            '}';
+    return "Article{"
+        + "id="
+        + id
+        + ", name='"
+        + name
+        + '\''
+        + ", price="
+        + price
+        + ", quantity="
+        + quantity
+        + '}';
   }
 }
