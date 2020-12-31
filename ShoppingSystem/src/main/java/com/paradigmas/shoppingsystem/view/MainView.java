@@ -1,35 +1,45 @@
 package com.paradigmas.shoppingsystem.view;
 
+import com.paradigmas.shoppingsystem.controller.MainController;
+
 import java.util.Scanner;
 
 public class MainView {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public void run() {
+    public void run(MainController mainController) {
         boolean canRunMenu = true;
 
         while (canRunMenu) {
             printMainMenuBanner();
-            executeInteractiveUserInput(scanner);
+            prompt(scanner, mainController);
         }
     }
 
-    private void executeInteractiveUserInput(Scanner scanner) {
+    private void prompt(Scanner scanner, MainController mainController) {
         String userInput = scanner.next();
 
         switch (userInput) {
             case "1":
                 System.out.println("1");
+                mainController.firstJob();
+                System.out.println("End 1");
                 break;
             case "2":
                 System.out.println("2");
+                mainController.secondJob();
+                System.out.println("End 2");
                 break;
             case "3":
                 System.out.println("3");
-
+                mainController.thirdJob();
+                System.out.println("End 3");
+                break;
             case "4":
                 System.out.println("4");
+                mainController.fourJob();
+                System.out.println("End 4");
                 break;
             case "5":
                 System.out.println("5");
