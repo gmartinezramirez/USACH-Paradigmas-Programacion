@@ -3,18 +3,41 @@ package com.paradigmas.shoppingsystem.repository;
 import com.paradigmas.shoppingsystem.model.Article;
 import com.paradigmas.shoppingsystem.model.ShoppingList;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ShoppingListRepository {
 
-    private static ShoppingList setUpInitialList() {
+    private ShoppingList shoppingList;
 
-        Article article1 = new Article("article1", 123.1, 1);
-        Article article2 = new Article("article2", 999.9, 1);
-        List<Article> articles = new ArrayList<>(Arrays.asList(article1, article2));
-        return new ShoppingList("Lista de compras", articles, 0.0);
+    public ShoppingListRepository(ShoppingList shoppingList) {
+        this.shoppingList = shoppingList;
     }
+
+    public ShoppingList retrieve() {
+        return shoppingList;
+    }
+
+    public void addArticle(Article article) {
+        shoppingList.getArticles().add(article);
+    }
+
+    public void removeArticleByName(String name) {
+        // Ref: https://stackoverflow.com/questions/36028995/remove-object-from-arraylist-with-some-object-property
+        shoppingList.getArticles()
+                .removeIf(article -> article.getName().equalsIgnoreCase(name));
+    }
+
+    public Article findArticleByName(String name) {
+        // Ref: https://www.baeldung.com/find-list-element-java
+        return shoppingList.getArticles().stream()
+                .filter(article -> article.getName().equalsIgnoreCase(name))
+                .findAny()
+                .orElse(null);
+    }
+
+    public List<Article> getArticles() {
+        return shoppingList.getArticles();
+    }
+
 
 }
