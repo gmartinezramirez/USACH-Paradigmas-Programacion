@@ -4,8 +4,8 @@ import com.paradigmas.shoppingsystem.view.MainView;
 
 public class OrchestratorController {
 
-    MainView mainView;
-    ShoppingListController shoppingListController;
+    private MainView mainView;
+    private ShoppingListController shoppingListController;
 
     public OrchestratorController(MainView mainView,
                                   ShoppingListController shoppingListController) {
