@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ShoppingListRepository {
 
-    private ShoppingList shoppingList;
+    private final ShoppingList shoppingList;
 
     public ShoppingListRepository(ShoppingList shoppingList) {
         this.shoppingList = shoppingList;

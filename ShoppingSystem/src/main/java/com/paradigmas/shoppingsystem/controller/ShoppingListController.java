@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 public class ShoppingListController {
 
-    private ShoppingListRepository shoppingListRepository;
-    private Scanner scanner;
+    private final ShoppingListRepository shoppingListRepository;
+    private final Scanner scanner;
 
     public ShoppingListController(ShoppingListRepository shoppingListRepository,
                                   Scanner scanner) {
