@@ -1,26 +1,25 @@
 package com.paradigmas.shoppingsystem.model;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ShoppingList {
 
-    private int id;
+    private static final AtomicInteger counter = new AtomicInteger();
+    private final int id;
     private String name;
     private List<Article> articles;
     private double totalPrice;
 
     public ShoppingList(String name, List<Article> articles, double totalPrice) {
+        this.id = counter.incrementAndGet();
         this.name = name;
         this.articles = articles;
         this.totalPrice = totalPrice;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

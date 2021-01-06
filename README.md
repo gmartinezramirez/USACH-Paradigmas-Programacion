@@ -1,5 +1,7 @@
-# paradigmas-programacion
-Código visto en clases
+# Paradigmas de programación
+
+Materia y código visto en clases. Referente a Java y al paradigma orientado a objetos (OOP)-
+Todo el código de este repositorio se hizo funcionar con Java 11.
 
 # OOP
 
@@ -56,3 +58,168 @@ Tip:
 Área rectángulo: largo*ancho
 
 Área triángulo: 0,5*base*altura
+
+# Java
+
+Los objetos esta relacionados unos con otros, tanto en la vida real como en la programación.
+
+## Composition and Aggregation (Composicion y Agregacion)
+
+### Composicion
+
+* La composición es una relación del tipo "pertenece a".
+* La relación "pertenece a" implica que uno de los objetos es una estructura más grande que otra que además lo contiene.
+* Composición indica que un objeto es parte de otro.
+* Relación del tipo "tiene un" (has a).
+* Los ciclos de vida del objeto se encuentran amarrados.
+* Si destruimos el objeto que contiene a otro, también se destruye este último.
+* Ejemplo:
+  * Un edificio esta compuesto de habitaciones, si destruimos el edificio también destruimos las habitaciones
+
+#### UML
+
+* La composición se representa con un diamante en negro.
+* Diamante en negro significa una relación fuerte.
+
+![image info](./docs/composition.png)
+
+![image info](./docs/composition-example.png)
+
+#### Java 
+
+* En Java la composición se da a través del uso de interfaces.
+* En el siguiente ejemplo no se utiliza interface.
+
+```java
+class Edificio {
+  List<Habitacion> habitaciones;
+  class Habitacion {}
+}
+```
+
+### Agregacion
+
+* La agregación es una relación del tipo "tiene un".
+* La diferencia con la composición es que no involucra la pertenencia.
+* Al no involucrar pertenencia, los ciclos de vida de los objetos no estan amarrados.
+* Cada uno de los objetos puede existir de forma independiente uno de otro
+* Ejemplo:
+  * Un auto y sus ruedas.
+  * Al auto le podemos remover las ruedas, pero aún existirán. El auto sigue existiendo y las ruedas siguen existiendo
+  * Podemos coloar otras ruedas o colocar las mismas ruedas a otro auto y todo funcionará bien.
+
+#### UML
+
+* La agregación se representa con un diamante en blanco. 
+* Diamante en blanco significa una relación débil.
+* Relación fuerte o débil hace referencia a la dependencia y ciclo de vida del objeto.
+
+![image info](./docs/aggregation.png)
+
+![image info](./docs/aggregation-example.png)
+    
+#### Java
+
+```java
+class Rueda {}
+
+class Auto {
+    List<Rueda> ruedas;
+}
+
+```
+
+```java
+class Rueda {
+    Auto auto;
+}
+
+class Auto {
+    List<Rueda> ruedas;
+}
+```
+
+
+### Como identificar cuando es composición o agregación?
+La regla es:
+```
+   A "posee" B = Composición : B no tiene ningún significado o proposito en el sistema sin A
+   A "usa" B = Agregación : B existe de forma independiente de A
+```
+
+## Association and Dependency (Asociación y Dependencia)
+
+* Una asociacion siempre implica que un objeto contiene a otro como un campo/propiedad/atributo.
+* Una dependencia implica que un objeto acepta a otro como parámetro de entrada, instancia, o utiliza otro objeto
+
+### UML
+
+![image info](./docs/uml1.JPG)
+
+![image info](./docs/uml2.jpg)
+
+![image info](./docs/uml3.jpg)
+
+![image info](./docs/uml4.png)
+
+### Java
+
+* Asociación --> A tiene-un objeto C (como atributo/miembro de la clase)
+* Dependencia --> A referencia B (como parametro de un método o tipo de retorno)
+
+```java
+public class A {
+  private C c;
+  public void miMetodo(B b) {
+    b.llamarMetodo();
+  }
+}
+
+```
+
+## Inherence (Herencia)
+
+### UML
+
+![image info](./docs/herencia.png)
+
+![image info](./docs/herencia2.png)
+
+## Polymorphism (Polimorfismo)
+
+![image info](./docs/polimorfismo.png)
+
+![image info](./docs/polimorfismo2.png)
+
+
+## Acoplamiento y Cohesion
+
+* Cohesión se refiere al grado en el cual los elementos de una clase/modulo estan juntos
+* Acoplamiento se refiere al grado en el cual las diferentes clases y módulos dependen unas de otras
+  * Se sugiere que todos las clases/módulos deberían ser lo más independientes posibles
+* El objetivo es: Alta cohesión, bajo acoplamiento
+* Alta cohesión significa que un módulo no hace muchas cosas, solo hace una cosa en particular. 
+    "Haz solo una cosa, y hazlo bien"
+* Cohesion - how closely related everything is with one another.
+* Coupling - how everything is connected to one another.
+
+* Imagen de referencia del curso OOP de Coursera
+
+![image info](./docs/acoplamiento.png)
+
+## Abstract Class (Clase Abstracta)
+
+![image info](./docs/claseabstracta1.png)
+
+
+## Interface
+
+![image info](./docs/interface.png)
+
+
+# Referencias
+
+1. https://www.uml-diagrams.org/class-reference.html
+2. https://www.baeldung.com/java-inheritance-composition
+3. https://www.baeldung.com/java-composition-aggregation-association
+

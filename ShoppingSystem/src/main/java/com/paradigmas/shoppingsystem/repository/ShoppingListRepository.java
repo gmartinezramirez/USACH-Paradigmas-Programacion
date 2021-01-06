@@ -17,27 +17,26 @@ public class ShoppingListRepository {
         return shoppingList;
     }
 
-    public void addArticle(Article article) {
+    public void addItem(Article article) {
         shoppingList.getArticles().add(article);
     }
 
-    public void removeArticleByName(String name) {
+    public void removeItemByName(String name) {
         // Ref: https://stackoverflow.com/questions/36028995/remove-object-from-arraylist-with-some-object-property
         shoppingList.getArticles()
                 .removeIf(article -> article.getName().equalsIgnoreCase(name));
     }
 
-    public Article findArticleByName(String name) {
+    public List<Article> getAllArticles() {
+        return shoppingList.getArticles();
+    }
+
+    public Article findItemByName(String name) {
         // Ref: https://www.baeldung.com/find-list-element-java
         return shoppingList.getArticles().stream()
                 .filter(article -> article.getName().equalsIgnoreCase(name))
                 .findAny()
                 .orElse(null);
     }
-
-    public List<Article> getArticles() {
-        return shoppingList.getArticles();
-    }
-
 
 }

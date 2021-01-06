@@ -4,7 +4,7 @@ import com.paradigmas.shoppingsystem.controller.OrchestratorController;
 
 import java.util.Scanner;
 
-public class MainView {
+public class MainView implements TextUserApplication {
 
     private final Scanner scanner;
 
@@ -12,7 +12,8 @@ public class MainView {
         this.scanner = scanner;
     }
 
-    public void run(OrchestratorController orchestratorController) {
+    @Override
+    public void execute(OrchestratorController orchestratorController) {
         boolean canRunMenu = true;
 
         while (canRunMenu) {

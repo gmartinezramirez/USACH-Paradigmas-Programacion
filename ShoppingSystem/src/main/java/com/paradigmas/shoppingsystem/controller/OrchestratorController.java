@@ -1,20 +1,21 @@
 package com.paradigmas.shoppingsystem.controller;
 
-import com.paradigmas.shoppingsystem.view.MainView;
+import com.paradigmas.shoppingsystem.view.TextUserApplication;
 
-public class OrchestratorController {
+public class OrchestratorController implements Orchestrator {
 
-    private final MainView mainView;
+    private final TextUserApplication textUserApplication;
     private final ShoppingListController shoppingListController;
 
-    public OrchestratorController(MainView mainView,
+    public OrchestratorController(TextUserApplication textUserApplication,
                                   ShoppingListController shoppingListController) {
-        this.mainView = mainView;
+        this.textUserApplication = textUserApplication;
         this.shoppingListController = shoppingListController;
     }
 
-    public void run() {
-        mainView.run(this);
+    @Override
+    public void execute() {
+        textUserApplication.execute(this);
     }
 
     public ShoppingListController getShoppingListController() {
