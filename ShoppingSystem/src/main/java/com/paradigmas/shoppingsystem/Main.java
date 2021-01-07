@@ -26,6 +26,18 @@ public class Main {
         final Scanner scanner = new Scanner(System.in);
         ShoppingList initialShoppingList = setUpInitialShoppingList();
 
+        System.out.println(initialShoppingList.getArticles().get(0).getId());
+        System.out.println(initialShoppingList.getArticles().get(1).getId());
+        System.out.println(initialShoppingList.getArticles().get(2).getId());
+
+        initialShoppingList.getArticles().add(new Article("articleN", 213.1, 10));
+
+
+        System.out.println(initialShoppingList.getArticles().get(3).getName());
+        System.out.println(initialShoppingList.getArticles().get(3).getId());
+
+        System.out.println(initialShoppingList.getArticles().get(2).getId());
+
         ShoppingListRepository shoppingListRepository =
                 new ShoppingListRepository(initialShoppingList);
         ShoppingListController shoppingListController =

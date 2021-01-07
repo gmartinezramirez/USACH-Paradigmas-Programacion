@@ -21,6 +21,7 @@ public class ShoppingListController {
         printInfoBanner("4. Agregar un nuevo articulo a una lista de compras");
         Article article = new Article("new article", 400, 20);
         shoppingListRepository.addItem(article);
+        //shoppingList.getArticles().add(article);
         System.out.println("Operación realizada con éxito!");
     }
 

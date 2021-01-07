@@ -11,4 +11,9 @@ public abstract class Animal {
         this.type = type;
     }
 
+    @Override
+    public doSound() {
+
+    }
+
 }

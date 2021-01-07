@@ -5,13 +5,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Article {
 
     private static final AtomicInteger counter = new AtomicInteger();
-    private final int id;
+    private final String id;
     private final String name;
     private double price;
     private int quantity;
 
     public Article(String name, double price, int quantity) {
-        this.id = counter.incrementAndGet();
+        this.id = "A" + counter.incrementAndGet();
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -19,14 +19,6 @@ public class Article {
 
     public String getName() {
         return name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     @Override
@@ -44,7 +36,7 @@ public class Article {
                 + '}';
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 }
