@@ -5,6 +5,8 @@ import com.paradigmas.shoppingsystem.controller.OrchestratorController;
 import com.paradigmas.shoppingsystem.controller.ShoppingListController;
 import com.paradigmas.shoppingsystem.model.Article;
 import com.paradigmas.shoppingsystem.model.ShoppingList;
+import com.paradigmas.shoppingsystem.model.ShoppingSystem;
+import com.paradigmas.shoppingsystem.model.User;
 import com.paradigmas.shoppingsystem.repository.ShoppingListRepository;
 import com.paradigmas.shoppingsystem.view.MainView;
 import com.paradigmas.shoppingsystem.view.TextUserApplication;
@@ -25,6 +27,20 @@ public class Main {
 
         final Scanner scanner = new Scanner(System.in);
         ShoppingList initialShoppingList = setUpInitialShoppingList();
+
+        // Creacion de usuarios
+        User user1 = new User("username1", "password");
+        User user2 = new User("username2", "password");
+        List<User> users = Arrays.asList(user1, user2);
+
+
+        // Creacion ShoppingSystem
+        ShoppingSystem shoppingSystem = new ShoppingSystem(users);
+        System.out.println(shoppingSystem.toString());
+
+        // Login
+        user1.login();
+        System.out.println(shoppingSystem.toString());
 
         System.out.println(initialShoppingList.getArticles().get(0).getId());
         System.out.println(initialShoppingList.getArticles().get(1).getId());

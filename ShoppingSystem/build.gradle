@@ -1,19 +1,20 @@
-plugins {
-    id 'java'
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'com.paradigmas.shoppingsystem.Main'
+
+group 'com.paradigmas'
+version '1.0-RELEASE'
+
+run{
+    standardInput = System.in
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
-
-repositories {
-    mavenCentral()
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
 }
 
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-}
+version = '1.2.1'
 
-test {
-    useJUnitPlatform()
-}
