@@ -10,11 +10,5 @@ run{
     standardInput = System.in
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(11)
-    }
-}
-
 version = '1.2.1'
 
