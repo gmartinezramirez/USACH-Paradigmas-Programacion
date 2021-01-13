@@ -2,7 +2,7 @@ package com.paradigmas.guiexample;
 
 import javax.swing.*;
 
-public class Main {
+public class HelloSwing {
     // Interfaz grafica utilizando Swing y AWT
     public static void main(String[] args) {
         JFrame frame = new JFrame("Hola mundo");
