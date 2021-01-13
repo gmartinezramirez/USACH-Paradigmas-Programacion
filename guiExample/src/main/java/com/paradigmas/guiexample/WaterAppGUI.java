@@ -10,6 +10,7 @@ public class WaterAppGUI extends JFrame implements ActionListener {
     private JLabel labelWeight;
     private JTextField fieldWeight;
     private JButton buttonTellMe;
+    private JButton buttonDoSomething;
 
     public WaterAppGUI() {
         super("Water Calculator");
@@ -22,19 +23,23 @@ public class WaterAppGUI extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void actionPerformed(ActionEvent event) {
-        String message = "Amigo, deberías tomar %.1f L de agua al día!";
-
-        float weight = Float.parseFloat(fieldWeight.getText());
-        float waterAmount = calculateWaterAmount(weight);
-
-        message = String.format(message, waterAmount);
-
-        JOptionPane.showMessageDialog(this, message);
-    }
-
     public static void main(String[] args) {
         new WaterAppGUI().setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent event) {
+        if (event.getSource() == buttonTellMe) {
+            String message = "Amigo, deberías tomar %.1f L de agua al día!";
+
+            float weight = Float.parseFloat(fieldWeight.getText());
+            float waterAmount = calculateWaterAmount(weight);
+
+            message = String.format(message, waterAmount);
+
+            JOptionPane.showMessageDialog(this, message);
+        } else if (event.getSource() == buttonDoSomething) {
+            System.out.println("holi");
+        }
     }
 
     private void initComponents() {
@@ -42,6 +47,7 @@ public class WaterAppGUI extends JFrame implements ActionListener {
         labelWeight = new JLabel("Mi peso (kg):");
         fieldWeight = new JTextField(5);
         buttonTellMe = new JButton("Dime");
+        buttonDoSomething = new JButton("Do something");
 
         // https://docs.oracle.com/javase/tutorial/uiswing/layout/flow.html
         setLayout(new FlowLayout());
@@ -50,9 +56,11 @@ public class WaterAppGUI extends JFrame implements ActionListener {
         add(labelWeight);
         add(fieldWeight);
         add(buttonTellMe);
+        add(buttonDoSomething);
 
         // https://stackoverflow.com/questions/15513380/how-to-open-a-new-window-by-clicking-a-button
         buttonTellMe.addActionListener(this);
+        buttonDoSomething.addActionListener(this);
     }
 
     private float calculateWaterAmount(float weight) {
