@@ -43,6 +43,7 @@ public class WaterAppGUI extends JFrame implements ActionListener {
         fieldWeight = new JTextField(5);
         buttonTellMe = new JButton("Dime");
 
+        // https://docs.oracle.com/javase/tutorial/uiswing/layout/flow.html
         setLayout(new FlowLayout());
 
         add(labelQuestion);
@@ -50,6 +51,7 @@ public class WaterAppGUI extends JFrame implements ActionListener {
         add(fieldWeight);
         add(buttonTellMe);
 
+        // https://stackoverflow.com/questions/15513380/how-to-open-a-new-window-by-clicking-a-button
         buttonTellMe.addActionListener(this);
     }
 
