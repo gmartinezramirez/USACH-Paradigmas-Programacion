@@ -13,12 +13,12 @@ public class WaterAppGUI extends JFrame implements ActionListener {
 
     public WaterAppGUI() {
         super("Water Calculator");
-        int frameWidth = 240;
-        int frameHeight = 150;
+        int windowWidth = 240;
+        int windowHeight = 150;
 
         initComponents();
 
-        setSize(frameWidth, frameHeight);
+        setSize(windowWidth, windowHeight);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
