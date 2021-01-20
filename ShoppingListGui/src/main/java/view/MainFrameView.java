@@ -9,6 +9,8 @@ public class MainFrameView extends JFrame implements ActionListener {
 
     private JLabel labelSomeAction;
     private JButton buttonSomeAction;
+    private JButton buttonOpenAnotherFrame;
+
 
     public MainFrameView() {
         super("Shopping List");
@@ -20,8 +22,13 @@ public class MainFrameView extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            String message = "Hola, esto es un mensaje";
-            JOptionPane.showMessageDialog(this, message);
+            if (e.getSource() == buttonSomeAction) {
+                String message = "Hola, esto es buttonSomeAction";
+                JOptionPane.showMessageDialog(this, message);
+            } else if (e.getSource() == buttonOpenAnotherFrame) {
+                String message = "Hola, esto es button openAnotherFrame";
+                JOptionPane.showMessageDialog(this, message);
+            }
         } catch (Exception exception) {
             JOptionPane.showMessageDialog(this, "Error!");
         }
@@ -29,13 +36,16 @@ public class MainFrameView extends JFrame implements ActionListener {
 
     private void initComponent() {
         labelSomeAction = new JLabel("Esto es un label");
-        buttonSomeAction = new JButton("Presioname");
+        buttonSomeAction = new JButton("Presioname para un dialog");
+        buttonOpenAnotherFrame = new JButton("Presioname para un frame");
 
         add(labelSomeAction);
         add(buttonSomeAction);
+        add(buttonOpenAnotherFrame);
 
         setLayout(new FlowLayout());
 
         buttonSomeAction.addActionListener(this);
+        buttonOpenAnotherFrame.addActionListener(this);
     }
 }
