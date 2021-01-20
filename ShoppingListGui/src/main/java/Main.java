@@ -1,8 +1,8 @@
-import view.MainFrameView;
+import view.MainFrame;
 
 public class Main {
     public static void main(String[] args) {
 
-        new MainFrameView().setVisible(true);
+        new MainFrame().setVisible(true);
     }
 }
