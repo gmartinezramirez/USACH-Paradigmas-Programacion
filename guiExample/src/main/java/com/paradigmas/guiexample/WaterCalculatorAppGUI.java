@@ -11,11 +11,14 @@ public class WaterCalculatorAppGUI extends JFrame implements ActionListener {
     private JLabel labelWeight;
     private JTextField fieldWeight;
     private JButton buttonAction;
+    private JButton buttonOpenFrame;
+    private JList namesListComponent;
 
     public WaterCalculatorAppGUI() {
         super("Water Calculator");
         initComponent();
         setSize(250, 200);
+        setLocationRelativeTo(null); // Inicia al centro
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -23,13 +26,19 @@ public class WaterCalculatorAppGUI extends JFrame implements ActionListener {
         new WaterCalculatorAppGUI().setVisible(true);
     }
 
+    @Override
     public void actionPerformed(ActionEvent event) {
         try {
-            String message = "Amigo, necesitas tomar %.1f L de agua";
-            float weight = Float.parseFloat(fieldWeight.getText());
-            float amountWaterToDrink = calculateAmountOfWater(weight);
-            message = String.format(message, amountWaterToDrink);
-            JOptionPane.showMessageDialog(this, message);
+            if(event.getSource()==buttonAction) {
+                String message = "Amigo, necesitas tomar %.1f L de agua";
+                float weight = Float.parseFloat(fieldWeight.getText());
+                float amountWaterToDrink = calculateAmountOfWater(weight);
+                message = String.format(message, amountWaterToDrink);
+                JOptionPane.showMessageDialog(this, message);
+            } else if (event.getSource() == buttonOpenFrame) {
+                setVisible(false);
+                new AnotherFrame().setVisible(true);
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Valor incorrecto :(");
         }
@@ -40,17 +49,37 @@ public class WaterCalculatorAppGUI extends JFrame implements ActionListener {
         labelWeight = new JLabel("Cuanto pesas en kg?");
         fieldWeight = new JTextField(5);
         buttonAction = new JButton("Presioname");
+        buttonOpenFrame = new JButton("Abrir otra ventana");
 
         add(labelQuestion);
         add(labelWeight);
         add(fieldWeight);
         add(buttonAction);
+        add(buttonOpenFrame);
+
+        java.util.List<String> names = new java.util.ArrayList<>();
+        names.add("gonzalo");
+        names.add("maximiliano");
+        names.add("mauricio");
+
+        var listModel = new DefaultListModel();
+        listModel.addElement("Jane Doe");
+        listModel.addElement("John Smith");
+        listModel.addElement("Kathy Green");
+        var namesListComponent = new JList(listModel);
+
+        for (String name: names) {
+            listModel.addElement(name);
+        }
+
+        add(namesListComponent);
 
         // https://docs.oracle.com/javase/tutorial/uiswing/layout/flow.html
         setLayout(new FlowLayout());
 
         // ActionListener
         buttonAction.addActionListener(this);
+        buttonOpenFrame.addActionListener(this);
     }
 
     private float calculateAmountOfWater(float weight) {
