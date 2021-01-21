@@ -1,0 +1,13 @@
+C:\Users\Usach\source\repos\slnClaseEventos\gui\bin\Debug\gui.exe.config
+C:\Users\Usach\source\repos\slnClaseEventos\gui\bin\Debug\gui.exe
+C:\Users\Usach\source\repos\slnClaseEventos\gui\bin\Debug\gui.pdb
+C:\Users\Usach\source\repos\slnClaseEventos\gui\obj\Debug\gui.Properties.Resources.resources
+C:\Users\Usach\source\repos\slnClaseEventos\gui\obj\Debug\gui.csproj.GenerateResource.cache
+C:\Users\Usach\source\repos\slnClaseEventos\gui\obj\Debug\gui.csproj.CoreCompileInputs.cache
+C:\Users\Usach\source\repos\slnClaseEventos\gui\obj\Debug\gui.exe
+C:\Users\Usach\source\repos\slnClaseEventos\gui\obj\Debug\gui.pdb
+C:\Users\Usach\source\repos\slnClaseEventos\gui\bin\Debug\modelo.dll
+C:\Users\Usach\source\repos\slnClaseEventos\gui\bin\Debug\modelo.pdb
+C:\Users\Usach\source\repos\slnClaseEventos\gui\obj\Debug\gui.csprojAssemblyReference.cache
+C:\Users\Usach\source\repos\slnClaseEventos\gui\obj\Debug\gui.Form1.resources
+C:\Users\Usach\source\repos\slnClaseEventos\gui\obj\Debug\gui.csproj.CopyComplete

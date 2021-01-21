@@ -1,0 +1,9 @@
+C:\Users\Usach\source\repos\slnClaseEventos\modelo\bin\Debug\netstandard2.0\modelo.deps.json
+C:\Users\Usach\source\repos\slnClaseEventos\modelo\bin\Debug\netstandard2.0\modelo.dll
+C:\Users\Usach\source\repos\slnClaseEventos\modelo\bin\Debug\netstandard2.0\modelo.pdb
+C:\Users\Usach\source\repos\slnClaseEventos\modelo\obj\Debug\netstandard2.0\modelo.csprojAssemblyReference.cache
+C:\Users\Usach\source\repos\slnClaseEventos\modelo\obj\Debug\netstandard2.0\modelo.AssemblyInfoInputs.cache
+C:\Users\Usach\source\repos\slnClaseEventos\modelo\obj\Debug\netstandard2.0\modelo.AssemblyInfo.cs
+C:\Users\Usach\source\repos\slnClaseEventos\modelo\obj\Debug\netstandard2.0\modelo.csproj.CoreCompileInputs.cache
+C:\Users\Usach\source\repos\slnClaseEventos\modelo\obj\Debug\netstandard2.0\modelo.dll
+C:\Users\Usach\source\repos\slnClaseEventos\modelo\obj\Debug\netstandard2.0\modelo.pdb

@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30225.117
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EjemploParadigmasGUI", "EjemploParadigmasGUI\EjemploParadigmasGUI.csproj", "{F90092B3-9F12-4926-A9EA-4F6F25600366}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gui", "gui\gui.csproj", "{3E92CAA5-18F3-4850-A17D-4436FA24511D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "modelo", "modelo\modelo.csproj", "{1C464FE1-535C-4935-BD19-C1C5BAF08E91}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F90092B3-9F12-4926-A9EA-4F6F25600366}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F90092B3-9F12-4926-A9EA-4F6F25600366}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F90092B3-9F12-4926-A9EA-4F6F25600366}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F90092B3-9F12-4926-A9EA-4F6F25600366}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E92CAA5-18F3-4850-A17D-4436FA24511D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E92CAA5-18F3-4850-A17D-4436FA24511D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E92CAA5-18F3-4850-A17D-4436FA24511D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E92CAA5-18F3-4850-A17D-4436FA24511D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C464FE1-535C-4935-BD19-C1C5BAF08E91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C464FE1-535C-4935-BD19-C1C5BAF08E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C464FE1-535C-4935-BD19-C1C5BAF08E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C464FE1-535C-4935-BD19-C1C5BAF08E91}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F1CFF562-8A2B-4377-9D83-C2A814934822}
+	EndGlobalSection
+EndGlobal

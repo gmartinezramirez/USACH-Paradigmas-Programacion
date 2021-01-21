@@ -1,0 +1,10 @@
+C:\Users\Usach\source\repos\slnClaseEventos\EjemploParadigmasGUI\bin\Debug\EjemploParadigmasGUI.exe.config
+C:\Users\Usach\source\repos\slnClaseEventos\EjemploParadigmasGUI\bin\Debug\EjemploParadigmasGUI.exe
+C:\Users\Usach\source\repos\slnClaseEventos\EjemploParadigmasGUI\bin\Debug\EjemploParadigmasGUI.pdb
+C:\Users\Usach\source\repos\slnClaseEventos\EjemploParadigmasGUI\obj\Debug\EjemploParadigmasGUI.csprojAssemblyReference.cache
+C:\Users\Usach\source\repos\slnClaseEventos\EjemploParadigmasGUI\obj\Debug\EjemploParadigmasGUI.Form1.resources
+C:\Users\Usach\source\repos\slnClaseEventos\EjemploParadigmasGUI\obj\Debug\EjemploParadigmasGUI.Properties.Resources.resources
+C:\Users\Usach\source\repos\slnClaseEventos\EjemploParadigmasGUI\obj\Debug\EjemploParadigmasGUI.csproj.GenerateResource.cache
+C:\Users\Usach\source\repos\slnClaseEventos\EjemploParadigmasGUI\obj\Debug\EjemploParadigmasGUI.csproj.CoreCompileInputs.cache
+C:\Users\Usach\source\repos\slnClaseEventos\EjemploParadigmasGUI\obj\Debug\EjemploParadigmasGUI.exe
+C:\Users\Usach\source\repos\slnClaseEventos\EjemploParadigmasGUI\obj\Debug\EjemploParadigmasGUI.pdb
