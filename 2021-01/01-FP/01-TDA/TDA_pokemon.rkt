@@ -16,6 +16,27 @@
   (lambda (name level hp)
     (list name level hp)))
 
+(define pokemon-get-name
+  (lambda (pokemon)
+    (car pokemon)))
+
+(define pokemon-get-level
+  (lambda (pokemon)
+    (car (cdr pokemon))))
+
+(define pokemon-get-hp
+  (lambda (pokemon)
+    (car (cdr (cdr pokemon)))))
+
+(define pokemon-level-up
+  (lambda (pokemon)
+    (list (pokemon-get-name pokemon)
+          ( + (pokemon-get-level pokemon) 1)
+          (pokemon-get-hp pokemon))))
+                            
+(define pokemon-eeve
+  (pokemon "eevee" 9 50))
+
 (define pokemon-squirtle
   (pokemon "squirtle" 8 100))
 
@@ -28,13 +49,27 @@
 (define pokemon-pidgeot
   (pokemon "pidgeot" 3 70))
 
+
+;(define (my-append lst item)
+;  (if (null? lst)
+;    (list item)
+;    (cons (car lst) (my-append (cdr lst) item))))
+
+;(define (my-append lst item)
+;  (cond [(null? lst) (list item)]
+;        [(cons (car lst)
+;               (my-append (cdr lst) item))]))
+
+(define (append-pokemon-to-pokemons pokemons pokemon)
+  (cond [(null? pokemons) (list pokemon)]
+        [(cons (car pokemons)
+               (append-pokemon-to-pokemons (cdr pokemons) pokemon))]))
+
 (define trainer-capture-pokemon
   (lambda (trainer)
     (lambda (pokemon)
-      (list (trainer-get-name trainer)
-            (cons (trainer-get-pokemons trainer) pokemon)))))
+      (append-pokemon-to-pokemons (trainer-get-pokemons trainer) pokemon))))
 
-  
 (define initial-pokemons-ash
   (list pokemon-pikachu pokemon-charmander pokemon-pidgeot))
 
@@ -52,6 +87,6 @@
 (trainer-get-pokemons trainer-gary)
 
 ((trainer-capture-pokemon trainer-ash) pokemon-squirtle)
+((trainer-capture-pokemon trainer-ash) pokemon-eeve)
 
-;; TODO: Ash must return Squirtle pokemon, at the moment is not working
-(trainer-get-pokemons trainer-ash)
+(pokemon-level-up pokemon-pikachu)
