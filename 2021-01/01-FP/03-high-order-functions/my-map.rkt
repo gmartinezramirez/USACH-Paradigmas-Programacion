@@ -7,9 +7,10 @@
 ;; Rec: usuario <list>
 ;; Tipo de recursión: NA
 (define (my-map fn lst)
-  (cond [(null? lst) '()]
-        [else (cons (fn (car lst))
-                    (my-map fn (cdr lst)))]))
+  (cond
+    [(null? lst) '()]
+    [else (cons (fn (car lst))
+                (my-map fn (cdr lst)))]))
 
 ;; Ejemplos
 
