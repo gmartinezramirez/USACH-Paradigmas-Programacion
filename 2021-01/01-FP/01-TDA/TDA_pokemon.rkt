@@ -61,9 +61,10 @@
 ;               (my-append (cdr lst) item))]))
 
 (define (append-pokemon-to-pokemons pokemons pokemon)
-  (cond [(null? pokemons) (list pokemon)]
-        [(cons (car pokemons)
-               (append-pokemon-to-pokemons (cdr pokemons) pokemon))]))
+  (cond
+    [(null? pokemons) (list pokemon)]
+    [(cons (car pokemons)
+           (append-pokemon-to-pokemons (cdr pokemons) pokemon))]))
 
 (define trainer-capture-pokemon
   (lambda (trainer)
@@ -90,3 +91,13 @@
 ((trainer-capture-pokemon trainer-ash) pokemon-eeve)
 
 (pokemon-level-up pokemon-pikachu)
+
+(define member?
+  (lambda (item lst)
+    (cond
+      [(null? lst) #f]
+      [(equal? item (car lst)) #t]
+      [else (member? item (cdr lst))])))
+
+(member? "mewtwo" pokemon-pikachu)
+(member? "pikachu" pokemon-pikachu)
