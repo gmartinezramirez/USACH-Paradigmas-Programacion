@@ -56,23 +56,36 @@
 ;; if / cond
 ;; (cond) (lo que se ejecuta si cond es true)
 
-;; Funciones con currificación
+; FUNCION SIN CURRIFICAR
+;(define fecha
+;  (lambda (dia mes año)
+;    (list dia mes año)))
 
+; FUNCION CURRIFICADA
 (define curry-fecha
   (lambda (dia)
     (lambda (mes)
       (lambda (año)
         (list dia mes año)))))
 
-; dia 21  , mes 4, año 2021
-(curry-fecha 21) ;RETORNA FUNCION
+;  expected: 1
+;  given: 3
+;(curry-fecha 21 04 2021)
 
-; dia 21  , mes 4, año 2021
-((curry-fecha 21) 4)
-;(funcion_1(4))
-;(funcion_2()) ;RETORNA FUNCION
+(curry-fecha 21)
+;RETURN    (lambda (mes)
+;            (lambda (año)
+;               (list dia mes año)))))
 
-(((curry-fecha 21) 4) 2021)
-;((funcion_1 4) 2021)
-;(funcion_2 2021)
-;'(21 4 2021)
+((curry-fecha 21) 04)
+; RETURN       (lambda (año) (list dia mes año)))))
+
+(((curry-fecha 21) 04) 2021)
+; RETURN '(21 4 2021)
+
+(define (saludo arg1)
+  (list "hola" "chao"))
+
+(define saludo
+  (lambda (arg1)
+    (list "hola" "chao")))
