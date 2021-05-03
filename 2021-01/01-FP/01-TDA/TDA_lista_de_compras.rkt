@@ -115,3 +115,33 @@ lista-v3
     (reverse (cons item (reverse lista)))))
 
 (add-item-tail lista-compras-inicial articulo-2)
+
+;; Filtro
+;; (manzana manzana manzana manzana pera pera pera naranja naranja)
+;;    es-una-manzana?  es-una-manzana?
+;; if lista(i) == manzana, then return manzana
+;; Predicados:  retorna valor booleano, T or F
+;; Filtor es una funcion que recibe un predicado y una lista. Opera predicado sobre los elementos de la lista
+
+
+;; Referencia: funcion vista en clase
+(define (my-filter pred lst)
+  (cond
+    [(empty? lst) '()] ;null? null
+    [(pred (car lst))  ;; si predicado es verdero, ejecuto la siguiente linea, caso contrario, ejecuto else
+     (cons (car lst) (my-filter pred (cdr lst)))]
+    [else (my-filter pred (cdr lst))]))
+
+(define pred-precio-mayor-a?
+  (lambda (precio)
+    (lambda (articulo)
+      (cond [(> (get-precio articulo) precio) #t] ; Se puede utilizar eq? o =
+            [else #f]))))
+
+;(my-filter (pred-precio-mayor-a? 100) '(100 200 300 400))
+
+lista-v3
+(my-filter (pred-precio-mayor-a? 500) lista-v3)
+
+;; (("mi articulo 1" 999) ("mi articulo 2" 200) ("mi articulo 1" 100))
+
