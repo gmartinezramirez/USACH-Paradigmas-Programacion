@@ -59,15 +59,3 @@
 ;(my-filter (is-current-number-eq-to? 10) '(10 10 20 30 40 10 50 60 10))
 
 
-;; Insertar un elemento en una lista sin duplicados
-
-;(define is-the-element-in-current-list?
-
-;(define insertar
-;  (lambda (elemento lista)
-;    (cons elemento (my-filter
-;                    (lambda (e)
-;                      (not (eqv? elemento e)))
-;                    lista))))
-
-;(insertar 1 '(10 20 30 40 50 1 2))
