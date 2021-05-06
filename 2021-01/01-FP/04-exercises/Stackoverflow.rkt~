@@ -1,0 +1,41 @@
+#lang racket
+
+;; Copiar y pegar el siguiente código en DrRacket
+
+;; StackOverflow es un sistema preguntas y respuestas (Q&A) que consta con los siguientes TDA
+;; que contienen entidades en particular
+;; TDA StackOverflow: id <numero, autoincremental>, usuarios <lista de usuarios>, preguntas <lista de preguntas>
+;; TDA Usuario: id <numero, autoincremental>, usuarios <lista de usuarios>, preguntas <lista de preguntas>
+;; TDA Preguntas: id <numero, autoincremental>, usuarios <lista de usuarios>, preguntas <lista de preguntas>
+
+;; C
+
+;; 1. Definir funcion de login y register
+;; 2. Definir funcion que simule la acción de que un usuario realice una pregunta
+;; Considerar que un usuario solo puede realizar una pregunta si esta registrado y logueado
+;; La pregunta debe ser agregada al listado de preguntas de StackOverflow y retornar un nuevo estado del mismo
+
+(define stackoverflow
+  (lambda (id usuarios preguntas)
+    (list id usuarios preguntas)))
+
+(define pregunta
+  (lambda (id usuario contenido)
+    (list id usuario contenido)))
+
+(define usuario
+  (lambda (id username password)
+    (list id usuario password)))
+
+(define getStackId
+  (lambda (stackoverflow)
+    (car stackoverflow)))
+
+(define getPreguntaId
+  (lambda (pregunta)
+    (car pregunta)))
+
+(define getUsuarioId
+  (lambda (usuario)
+    (car usuario)))
+
