@@ -27,21 +27,18 @@
 (define (get-precio juego) (cadddr juego))
 (define (get-calificacion juego) (cadddr (cdr juego)))
 
-;; En su pep pueden simplemente simplificarlo como caddddr
-;(define (get-ha-sido-retornado? pelicula) (caddddr prestamo))
-
 ;; Pregunta 2
 ; Implemente una función que permita añadir nuevos juegos al registro de juegos de SMart.
 
 ;; Descripción: Función que recibe los datos que corresponden a un juego y lo agrega a una lista de juego
 ;;              preexistente. En caso de que esta lista se encuentre vacia, se agrega como primer elemento
 ;; Dom: id number, plataforma str, precio number, calificacion number, lista-juegos lista(juegos)
-;; Rec: lista de prestamos
+;; Rec: lista de videojuegos
 ;; Tipo de recursión: Recursión natural
 ;; Ejemplo de uso:
-;; (define lista-prestamo-con-nuevo-prestamo
-;;  (agregar-nuevo-prestamo "11249818-k" 2 "10-ene-21" "15-feb-21" #t lista-prestamos-actual))
-;; Nota: Esto no considera que hayan duplicados o se ingrese prestamos ya existentes
+;; (define lista-juegos-con-nuevo-juego
+;;  (agregar-nuevo-juego "11249818-k" 2 "10-ene-21" "15-feb-21" #t lista-juegos-actual))
+;; Nota: Esto no considera que hayan duplicados o se ingrese juegos ya existentes
 (define agregar-nuevo-juego
   (lambda (id nombre plataforma precio calificacion lista-juegos)
     (cond
@@ -92,7 +89,7 @@ lista-juego-ejemplo-con-nuevo-juego
 ;; Rec: lista
 ;; Tipo de recursión: Recursión natural
 ;; Ejemplo de uso:
-;; (mi-filtro (mi-funcion-predicado argumento) lista-prestamos)
+;; (mi-filtro (mi-funcion-predicado argumento) lista-juegos)
 ;; Referencia: Función vista en clase del profesor Gonzalo Martinez
 (define (mi-filtro pred lista)
   (cond
@@ -103,7 +100,7 @@ lista-juego-ejemplo-con-nuevo-juego
 
 ;; Descripción: Función predicado currificada que devuelve #t si el nombre ingresado coincide con el videojuego
 ;;              caso contrario devuelve #f
-;; Dom: rut str, prestamos (lista de prestamos)
+;; Dom: nombre str, juegos (lista de juegos)
 ;; Rec: boolean
 ;; Ejemplo de uso:
 ;; ((es-mismo-nombre? "Prince of Persia") lista-juego-ejemplo)
@@ -121,10 +118,10 @@ lista-juego-ejemplo-con-nuevo-juego
 
 ;; Descripción: Función predicado currificada que devuelve #t si el juego se encuentra dentro del rango
 ;;              caso contrario devuelve #t
-;; Dom:  prestamos (lista de prestamos)
+;; Dom:  juegos (lista de juegos)
 ;; Rec: boolean
 ;; Ejemplo de uso:
-;; (es-no-retornado? lista-prestamo-ejemplo)
+;; (es-no-retornado? lista-juego-ejemplo)
 (define precio-se-encuentra-dentro-de-rango?
   (lambda (min max)
     (lambda (juegos)
