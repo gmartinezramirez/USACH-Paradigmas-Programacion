@@ -19,8 +19,24 @@
 ;(define (get-elemento8 tda) (cadddr (cdr (cdr (cdr (cdr tda))))))
 ;(define (get-elemento9 tda) (cadddr (cdr (cdr (cdr (cdr (cdr tda)))))))
 
+; Capa modificadora
+(define set-precio
+  (lambda (articulo-a-modificar nuevo-precio)
+    (articulo (get-id articulo-a-modificar)
+              (get-nombre articulo-a-modificar)
+              (get-tipo articulo-a-modificar)
+              nuevo-precio)))
+
 ;; TDA Lista de articulos
 (define (lista-articulos . articulos) articulos)
+
+; Capa modificadora
+(define set-precio-articulo-lista
+  (lambda (articulos nuevo-precio)
+    (articulo (get-id (car articulos))
+              (get-nombre (car articulos))
+              (get-tipo (car articulos))
+              (set-precio (car articulos) nuevo-precio))))
 
 ; Ejemplo
 (define lista-inicial-articulos
@@ -34,11 +50,6 @@ lista-inicial-articulos
 
 ;; Agregar un nuevo articulo a la lista de articulos
 
-;; Descripción: Natural
-;; Dom: Natural
-;; Rec: Natural
-;; Recursión: Natural
-;; Conceptos utilizados: Recursión-Pares-Listas
 ;; Nota: No considera el caso de duplicados
 (define agregar-nuevo-articulo
   (lambda (id nombre tipo precio lista-articulos)
@@ -60,8 +71,6 @@ lista-inicial-articulos
       (cons (car lista-articulos)
             (agregar-articulo (cdr lista-articulos) articulo))))
 
-
-
 ; Ejemplo
 (define articulo-tablet
   (articulo 99 "tablet" "tecnologia" 999))
@@ -72,9 +81,22 @@ lista-inicial-articulos
 lista-articulos-nuevo-elemento
 
 ;; Ingresar el precio de un articulo de acuerdo a su nombre
-;; TODO
+(define modificar-lista-si-precio-es-mismo
+  (lambda (nombre nuevo-precio lista-articulos)
+    (cond
+      [(null? lista-articulos) lista-articulos]
+      [(eq? (get-nombre (car lista-articulos)) nombre)
+       (cons (set-precio-articulo-lista lista-articulos nuevo-precio)
+             (cdr lista-articulos))]
+      [else modificar-lista-si-precio-es-mismo nombre nuevo-precio (cdr lista-articulos)])))
 
-;; Aplicar un descuento de 100 en todos los articulos de la lista de articulos
+(define lista-precio-modificado
+  (modificar-lista-si-precio-es-mismo "kiwi" 99999 lista-inicial-articulos))
+
+lista-precio-modificado
+
+
+ ;; Aplicar un descuento de 100 en todos los articulos de la lista de articulos
 
 ;; Map es una función que te permite transformar los elementos de una lista y
 ;; que devuelve una nueva lista con los elementos transformados.
@@ -108,10 +130,6 @@ lista-articulos-nuevo-elemento
 
 ;; Recuperar todos los articulos que tengan un precio entre un minimo y un maximo
 
-;; Descripción: Natural
-;; Dom: Natural
-;; Rec: Natural
-;; Recursión: Natural
 ;; Referencia: Función vista en clase del profesor Gonzalo Martinez
 (define (mi-filtro pred lista)
   (cond
@@ -205,21 +223,14 @@ lista-articulos-nuevo-elemento
 
 ;; Descripción: La función reducir reduce una lista de valores a un solo valor, aplicando de forma repetida
 ;;              una función binaria (es decir, 2 argumentos de entrada) a la lista de valores
-;; Dom: Natural
-;; Rec: Natural
-;; Recursión: Natural
 ;; Referencia: Función vista en clase del profesor Gonzalo Martinez
 (define mi-reducir
-  (lambda (funcion-reduccion lista valor-identidad)
+  (lambda (funcion-reduccion lista acum)
     (cond
-      [(null? lista) valor-identidad]
+      [(null? lista) acum]
       [(funcion-reduccion (car lista)
-                          (mi-reducir funcion-reduccion (cdr lista) valor-identidad))])))
+                          (mi-reducir funcion-reduccion (cdr lista) acum))])))
 
-;; Descripción: Natural
-;; Dom: Natural
-;; Rec: Natural
-;; Ejemplo: (reducir sumar-precios-lista lista-inicial-articulos 0))
 (define operacion-sumar-y-acumular-precios-articulos
   (lambda (articulo acum)
     (+ (get-precio articulo) acum)))
@@ -283,6 +294,20 @@ lista-articulos-nuevo-elemento
 ; Ejemplo
 (my-list-ref lista-inicial-articulos 1)
 
+;;-------------------------------------------------------
+;; Resumen
+
+
+; Constructor del TDA lista de elementos
+(define (lista-elementos . elementos) elementos)
+
+; Función para agregar un elemento e una lista L
+(define agregar-elemento
+  (lambda (L e)
+    (if (null? L)
+        (cons e null)
+        (cons (car L) (agregar (cdr L) e)))))
+
 ;; Resumen de funciones clásicas de alto nivel
 
 ; my-map: Aplica la función f a todos los elementos de la lista L
@@ -301,4 +326,9 @@ lista-articulos-nuevo-elemento
             (cons (car L) (my-filter f (cdr L)))
             (my-filter f (cdr L))))))
 
-
+; my-reduce: Reduce una lista de valores L a un solo valor acumulado (acc) aplicando una función de reducción f
+(define my-reduce
+  (lambda (f L acc)
+    (if (null? L)
+        acc
+        (f (car L) (my-reduce f (cdr L) acc)))))
