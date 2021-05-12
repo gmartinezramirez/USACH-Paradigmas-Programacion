@@ -51,11 +51,9 @@
 ;; El objetivo es filtrar de la lista, los elementos que sean mayores o iguales a N
 (my-filter (is-current-number-eq-or-greater-than? 30) '(10 20 30 40 50))
 
-
-
-;(my-filter (is-current-number-eq-or-less-than? 20) '(10 20 30 40 50))
+(my-filter (is-current-number-eq-or-less-than? 20) '(10 20 30 40 50))
 
 ;; El objetivo es filtrar de la lista, los elementos que sean iguales a N
-;(my-filter (is-current-number-eq-to? 10) '(10 10 20 30 40 10 50 60 10))
+(my-filter (is-current-number-eq-to? 10) '(10 10 20 30 40 10 50 60 10))
 
 
