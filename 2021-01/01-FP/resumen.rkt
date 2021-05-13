@@ -219,6 +219,31 @@ lista-precio-modificado
 
 (((aplicar-descuento-en-articulos-de-cierta-categoria-curry 30) "tecnologia") lista-inicial-articulos)
 
+
+;; Aplicando una funcion f si es que el elemento cumple un criterio c
+; Otra forma de resolverlo es usando map
+
+(define aplicar-descuento-si-cumple-criterio
+  (lambda (descuento criterio)
+      (lambda (articulo-a-cambiar)
+        (cond
+          [(criterio articulo-a-cambiar)
+           (articulo (get-id articulo-a-cambiar)
+                     (get-nombre articulo-a-cambiar)
+                     (get-tipo articulo-a-cambiar)
+                     (- (get-precio articulo-a-cambiar) descuento))]))))
+
+;; Recuperar todos los articulos de un cierto tipo, por ejemplo: "tecnologia"
+(define criterio-articulo-es-del-tipo
+  (lambda (tipo)
+    (lambda (articulo)
+      (cond
+        [(eq? tipo (get-tipo articulo) #t)]
+        [else #f]))))
+
+;(write "Aplicando una funcion f si es que el elemento cumple un criterio c \n")
+;(mi-map (aplicar-descuento-si-cumple-criterio 10 (criterio-articulo-es-del-tipo "tecnologia")) lista-inicial-articulos)
+       
 ;; Calcular la suma total de todos los precios de todos los articulos de esta lista
 
 ;; Descripción: La función reducir reduce una lista de valores a un solo valor, aplicando de forma repetida
@@ -244,6 +269,7 @@ lista-precio-modificado
     (mi-reducir operacion-sumar-y-acumular-precios-articulos lista-articulos 0)))
 
 (obtener-suma-de-todos-los-precios lista-inicial-articulos)
+
 
 ;; Ahora que ya sabemos y aplicamos el concepto de reduce (reducir)
 ;; Podemos obtener: La SUMA DEL PRECIO DE TODOS LOS ARTICULOS
