@@ -5,14 +5,14 @@
 ;; Descripción: Natural
 ;; Dom: Natural
 ;; Rec: Natural
-;; Recursión: Natural
+;; Recursión: Tail recursion, recursion de cola 
 ;; Referencia: Función vista en clase del profesor Gonzalo Martinez
 (define reducir
-  (lambda (funcion-reduccion lista valor-identidad)
+  (lambda (funcion-reduccion lista acc)
     (cond
-      [(null? lista) valor-identidad]
+      [(null? lista) acc]
       [(funcion-reduccion (car lista)
-                          (reducir funcion-reduccion (cdr lista) valor-identidad))])))
+                          (reducir funcion-reduccion (cdr lista) acc))])))
 
 (reducir + '(1 2 3 4 5) 0)
 (reducir - '(1 2 3 4 5) 0)
