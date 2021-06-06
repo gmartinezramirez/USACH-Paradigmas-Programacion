@@ -238,3 +238,56 @@ S5 = [[], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]]
 */
 
 
+% ------------------  Convertir el stack a string (stack->string)  ------------------
+/*
+ * Convertir usuario a string
+ * 
+*/
+
+singleUserToString([Username, Password, Reputation], UserStringRepresentation) :-
+	string_concat("Username: ", Username, UsernameStr),
+	string_concat("Password: ", Password, PasswordStr),
+	string_concat("Reputación: ", Reputation, ReputationStr),
+	atomics_to_string( [UsernameStr,PasswordStr,ReputationStr], 
+						'\n', UserStringRepresentation ).
+
+usersListToString(_, [], []) :- !.
+
+usersListToString( User, [CurrentUser|NextCurrentUsers], 
+				[ StrCurrentUser|StrNextCurrentUsers] ) :-
+	singleUserToString(CurrentUser, SingleUserStringRepresentation),
+	string_concat(SingleUserStringRepresentation, "\n", StrCurrentUser),
+	usersListToString(User, NextCurrentUsers, StrNextCurrentUsers).
+
+/*
+ * Convertir Stack a String
+ * 
+*/
+
+stackToString(CurrentStack, StackStringRepresentation) :-
+	stack( _, CurrentUsers, _, _, CurrentStack ),
+	usersListToString(_, CurrentUsers, UsersListStr),
+	atomic_list_concat(UsersListStr, '', UsersAtom),
+	atom_string(UsersAtom, UsersStr),
+	atomics_to_string([UsersStr],'', StackStringRepresentation).
+
+/*
+* Consulta exitosa para crear el string del stack: copiar y pegar en interprete
+
+stack([],[["MyUsername1","MyPassword1",0],["MyUsername2","MyPassword2",0]],[],[], S1),
+loginUserInStack(S1,"MyUsername2","MyPassword2",S2),
+ask(S2, "2020-01-01","¿Cuáles son los lenguajes más cool del 2021?", ["programming languages", "computer science"], S3),
+loginUserInStack(S3,"MyUsername1","MyPassword1",S4),
+answer(S4,"2021-03-11",1,"Probablemente Prolog no",["programming languages", "computer science"],S5),
+stackToString(S5, CurrentStackInString), write(CurrentStackInString).
+
+% Resultado
+S1 = [[], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]], [], []]
+S2 = [["MyUsername2"], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]], [], []]
+S3 = [[], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]], [[1, "MyUsername2", "2020-01-01", "¿Cuáles son los lenguajes más cool del 2021?", 0, "abierta", ["programming languages", "computer science"]]], []]
+S4 = [["MyUsername1"], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]], [[1, "MyUsername2", "2020-01-01", "¿Cuáles son los lenguajes más cool del 2021?", 0, "abierta", ["programming languages", "computer science"]]], []]
+S5 = [[], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]], [[1, "MyUsername2", "2020-01-01", "¿Cuáles son los lenguajes más cool del 2021?", 0, "abierta", ["programming languages", "computer science"]]], [[1, 1, "MyUsername1", "2021-03-11", "Probablemente Prolog no", 0, "no", ["programming languages", "computer science"]]]]
+CurrentStackInString =
+"Username: MyUsername1\nPassword: MyPassword1\nReputación: 0\nUsername: MyUsername2\nPassword: MyPassword2\nReputación: 0\n"
+
+*/
