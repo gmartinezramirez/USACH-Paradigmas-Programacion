@@ -9,26 +9,6 @@
 % Pregunta:  [ID: int,  UserName: string,  Pregunta:string]
 % Respuesta: [ID: int,  IDPregunta: int,   Username: string, Respuesta: string]
 
-% Metas secundarias
-% Se encuentran implementadas de forma nativa en prolog, pueden usarlas en su laboratorio
-
-exists(Elem,[Elem|_]):-!.
-exists(Elem,[_|T]):- exists(Elem,T).
-
-find([],_,_):-!,false.
-find([Elem|_],Elem,Elem):-!.
-find([_|T],Elem,F):- find(T,Elem,F).
-
-appendList([],L2,L2).
-appendList([H|T],L2,[H|T2]):- appendList(T,L2,T2).
-
-lengthList([],0).
-lengthList([_|T],Length):- lengthList(T,TL), Length is TL + 1.
-
-replace(_,_,[],[]).
-replace(O,R,[O|T],[R|T2]):- replace(O,R,T,T2).
-replace(O,R,[H|T],[H|T2]):- H \= O, replace(O,R,T,T2).
-
 % ------------------  TDA Fecha (date)  ------------------
 
 date(Day, Month, Year, [Day,Month,Year]).
@@ -75,6 +55,7 @@ answer( Id, QuestionId, Author, Date, Text, Votes, AcceptStatus, Labels,
 %answer(1,1,"MyUsername1","2021-06-12","Ni idea de Prolog, pero es sabroson",-10,"abierta",["prolog", "logic programming", "sabroson"], NewAnswerToQuestionId1).
 % NewAnswerToQuestionId1 = [1, 1, "MyUsername1", "2021-06-12", "Ni idea de Prolog, pero es sabroson", -10, "abierta", ["prolog", "logic programming", "sabroson"]]
 
+
 % ------------------  Registro de usuarios  ------------------
 
 % addRegisteredUser(UsersIn, Username, Password, UsersOut).
@@ -82,9 +63,9 @@ addRegisteredUser( CurrentUsers, Username, _ ,_) :-
 	exists( [Username, _], CurrentUsers ), % Si existe el Username en la lista ActualUsers, significa que el usuario ya existe
 	false.
 
-addRegisteredUser( [CurrentUser|CurrentUsers], Username, Password, UpdatedUsers):- 
+addRegisteredUser( [CurrentUser|NextCurrentUsers], Username, Password, UpdatedUsers):- 
 	user( Username, Password, 0, NewUser ), % Se crea un usuario con reputación 0. User = [Username, Password, 0].
-	appendList( [NewUser, CurrentUser], CurrentUsers, UpdatedUsers ).
+	appendList( [NewUser, CurrentUser], NextCurrentUsers, UpdatedUsers ).
 
 registerUserInStack( [_,[],_,_], Username, Password, UpdatedStack) :- 
 	stack( [], [[Username,Password,0]] , [], [], UpdatedStack).
@@ -145,13 +126,15 @@ setNewQuestionId(Question, NewId):-
     NewId is Id + 1.
 
 % Si es la primera pregunta agregada, entonces tiene Id=1
-addQuestion([],[Author|_], Date, Text, Labels, [Q]):- 
-    question(1, Author, Date, Text, 0, "abierta", Labels,Q).
+addQuestion( [],[Author|_], Date, Text, Labels, [NewQuestion] ) :- 
+    question( 1, Author, Date, Text, 0, "abierta", Labels, NewQuestion ).
 
-addQuestion([H|T],[Author|_],Date,Text,Labels,Q):-
-  setNewQuestionId(H,NewId),
-  question( NewId, Author, Date, Text, 0, "abierta", Labels, Question), % Pregunta se agrega con 0 votos
-  appendList([Question],[H|T],Q). %Agregar la pregunta (lista) a la lista de preguntas. Agregar una lista a una lista.
+addQuestion( [CurrentQuestion|NextCurrentQuestions], [Author|_], 
+            Date, Text, Labels, UpdatedQuestions ):-
+  setNewQuestionId( CurrentQuestion, NewId ),
+  question( NewId, Author, Date, Text, 0, "abierta", Labels, NewQuestion ), % Pregunta se agrega con 0 votos
+  appendList( [NewQuestion],[CurrentQuestion|NextCurrentQuestions], 
+              UpdatedQuestions ). %Agregar la pregunta (lista) a la lista de preguntas. Agregar una lista a una lista.
 
 ask(CurrentStack, Fecha, TextoPregunta, ListaEtiquetas, UpdatedStack):-
   stack(_, CurrentUsers, _ ,_ , CurrentStack),
