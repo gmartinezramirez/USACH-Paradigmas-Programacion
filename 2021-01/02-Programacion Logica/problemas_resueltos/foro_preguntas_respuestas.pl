@@ -9,7 +9,6 @@
 % Pregunta:  [ID: int,  UserName: string,  Pregunta:string]
 % Respuesta: [ID: int,  IDPregunta: int,   Username: string, Respuesta: string]
 
-
 % Metas secundarias
 % Se encuentran implementadas de forma nativa en prolog, pueden usarlas en su laboratorio
 
@@ -37,7 +36,8 @@ date(Day, Month, Year, [Day,Month,Year]).
 
 % ------------------  TDA Stack  ------------------
 
-stack(LoggedUser, Users, Questions, Answers, [LoggedUser, Users, Questions, Answers]).
+stack(LoggedUser, Users, Questions, Answers, 
+      [LoggedUser, Users, Questions, Answers]).
 
 % Creción de un stack vacío:
 % stack( [], [], [], [], S1).
@@ -50,12 +50,21 @@ stack(LoggedUser, Users, Questions, Answers, [LoggedUser, Users, Questions, Answ
 
 % ------------------  TDA User  ------------------
 
-
-user( Username, Password, Reputation, [Username, Password, Reputation]).
+user( Username, Password, Reputation, 
+      [Username, Password, Reputation]).
 
 % Creación de usuario
 %user("MyUsername","MyPassword", 10, User1).
 % User1 = ["MyUsername", "MyPassword", 10]
+
+
+% ------------------  TDA Question (pregunta)  ------------------
+
+question(Id, Author, Date, Text, Votes, Status, Labels,
+         [Id, Author, Date, Text, Votes, Status, Labels]).
+
+%question(1, "MyUsername1", "2020-12-02", "¿Cómo funciona Prolog?", 10, "abierta", ["prolog", "logic programming"], NewQuestion).
+% NewQuestion = [1, "MyUsername1", "2020-12-02", "¿Cómo funciona Prolog?", 10, "abierta", ["prolog", "logic programming"]]
 
 
 % ------------------  Registro de usuarios  ------------------
@@ -94,24 +103,64 @@ S1 = [[], [], [], []]
 S2 = [[], [["MyUsername1", "MyPassword1", 0]], [], []]
 */
 
+
 % ------------------  Login de usuario  ------------------
 
-validateLogin(CurrentUsers, Username, Password):- 
+validateLogin(CurrentUsers, Username, Password) :- 
     exists([Username, Password, _], CurrentUsers),
     true.
 
-loginUserInStack(CurrentStack, Username, Password, UpdatedStack):-
+loginUserInStack(CurrentStack, Username, Password, UpdatedStack) :-
 	stack( _, CurrentUsers, _, _, CurrentStack),
 	validateLogin(CurrentUsers, Username, Password ),
 	stack( _, _, CurrentQuestions, _, CurrentStack ),
 	stack( _, _, _, CurrentAnswers, CurrentStack ),
 	stack( [Username], CurrentUsers, CurrentQuestions, CurrentAnswers, UpdatedStack ).
 
+% ------------------  Agregar una pregunta al stack  ------------------
+/* TDA Question: [Id, Author, Date, Text, Votes, Status, Labels]).
+ * 
+ * Por defecto: 
+ * 	Una pregunta se agrega con el estado "abierta" (estado="abierta")
+ * 	Una pregunta se agrega con 0 votos (votos=0)
+ * Meta primaria:
+ * 	ask(CurrentStack, Fecha, TextoPregunta, ListaEtiquetas, UpdatedStack).
+ * Metas secundarias: 
+ * 	addQuestion (CurrentQuestions, Author, Date, Text, Labels, UpdatedQuestions).  
+ *  validateQuestionId(CurrentQuestions, QuestionId).
+ * 
+*/
+
+setNewQuestionId(Question, NewId) :- 
+    question(Id, _ , _, _, _, _, _, Question),
+    NewId is Id + 1.
+
+% Si es la primera pregunta agregada, entonces tiene Id=1
+addQuestion([],[Author|_], Date, Text, Labels, [Q]) :- 
+    question(1, Author, Date, Text, 0, "abierta", Labels,Q).
+
+addQuestion([H|T],[Author|_],Date,Text,Labels,Q) :-
+  setNewQuestionId(H,NewId),
+  question( NewId, Author, Date, Text, 0, "abierta", Labels, Question), % Pregunta se agrega con 0 votos
+  appendList([Question],[H|T],Q). %Agregar la pregunta (lista) a la lista de preguntas. Agregar una lista a una lista.
+
+ask(CurrentStack, Fecha, TextoPregunta, ListaEtiquetas, UpdatedStack) :-
+  stack( _, CurrentUsers, _ ,_ , CurrentStack ),
+  stack( CurrentLoggedUser, _, _, _, CurrentStack ),
+  lengthList( CurrentLoggedUser, Length ), Length = 1,  % Solo puedo hacer la pregunta si estoy logueado
+  stack( _, _, CurrentQuestions, _, CurrentStack ),
+  stack( _ , _, _, CurrentAnswers, CurrentStack ),
+  addQuestion( CurrentQuestions, CurrentLoggedUser, 
+               Fecha, TextoPregunta, ListaEtiquetas, UpdatedQuestions ),
+  stack( [], CurrentUsers, UpdatedQuestions, CurrentAnswers, UpdatedStack ).
+
 /*
 * Login exitoso de usuario previamente registrado en el sistema
-stack([],[["MyUsername1","MyPassword1",0],["MyUsername2","MyPassword2"]],[],[], SL1),
-loginUserInStack(SL1,"MyUsername1","MyPassword1",SL2).
+stack([],[["MyUsername1","MyPassword1",0],["MyUsername2","MyPassword2",0]],[],[], S1),
+loginUserInStack(S1,"MyUsername1","MyPassword1",S2),
+ask(S2, "2021-06-05","¿Cuáles son los lenguajes más populares el 2021?", ["programming languages", "computer science"], S3).
 
-SL1 = [[], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2"]], [], []]
-SL2 = [["MyUsername1"], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2"]], [], []]
+S1 = [[], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]], [], []]
+S2 = [["MyUsername1"], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]], [], []]
+S3 = [[], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]], [[1, "MyUsername1", "2021-06-05", "¿Cuáles son los lenguajes más populares el 2021?", 0, "abierta", ["programming languages", "computer science"]]], []]
 */
