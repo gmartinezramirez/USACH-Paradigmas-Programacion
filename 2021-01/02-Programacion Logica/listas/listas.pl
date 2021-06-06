@@ -220,4 +220,14 @@ ultimoElemento( Elemento , [Elemento] ).
 ultimoElemento( Elemento , [_|Lista] ) :- 
 	ultimoElemento( Elemento, Lista ).
 
+% 13. Reemplazar un elemento de una lista
+% reemplazar tambien llamado replace
 
+reemplazar( _, _, [], []).
+reemplazar( Antiguo, Reemplazo , [Antiguo|Resto], [Reemplazo|NuevoResto] ):- 
+    reemplazar( Antiguo, Reemplazo, Resto, NuevoResto ).
+reemplazar( Antiguo, Reemplazo, [Cabeza|Resto],[Cabeza|NuevoResto] ):- 
+    Cabeza \= Antiguo, 
+    reemplazar( Antiguo, Reemplazo, Resto, NuevoResto ).
+
+%reemplazar(2, b, [1,2,3,4], NuevaLista).
