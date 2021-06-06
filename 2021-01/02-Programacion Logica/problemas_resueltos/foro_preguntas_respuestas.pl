@@ -9,6 +9,26 @@
 % Pregunta:  [ID: int,  UserName: string,  Pregunta:string]
 % Respuesta: [ID: int,  IDPregunta: int,   Username: string, Respuesta: string]
 
+% Metas secundarias
+% Se encuentran implementadas de forma nativa en prolog, pueden usarlas en su laboratorio
+
+exists(Elem,[Elem|_]):-!.
+exists(Elem,[_|T]):- exists(Elem,T).
+
+find([],_,_):-!,false.
+find([Elem|_],Elem,Elem):-!.
+find([_|T],Elem,F):- find(T,Elem,F).
+
+appendList([],L2,L2).
+appendList([H|T],L2,[H|T2]):- appendList(T,L2,T2).
+
+lengthList([],0).
+lengthList([_|T],Length):- lengthList(T,TL), Length is TL + 1.
+
+replace(_,_,[],[]).
+replace(O,R,[O|T],[R|T2]):- replace(O,R,T,T2).
+replace(O,R,[H|T],[H|T2]):- H \= O, replace(O,R,T,T2).
+
 % ------------------  TDA Fecha (date)  ------------------
 
 date(Day, Month, Year, [Day,Month,Year]).
@@ -70,7 +90,7 @@ addRegisteredUser( [CurrentUser|NextCurrentUsers], Username, Password, UpdatedUs
 registerUserInStack( [_,[],_,_], Username, Password, UpdatedStack) :- 
 	stack( [], [[Username,Password,0]] , [], [], UpdatedStack).
 
-registerUserInStack( CurrentStack, Username, Password, UpdatedStack):-
+registerUserInStack( CurrentStack, Username, Password, UpdatedStack) :-
 	stack( _, CurrentUsers, _, _, CurrentStack ),
 	addRegisteredUser( CurrentUsers, Username, Password, UpdatedUsers ),
 	stack( _, _, CurrentQuestions, _, CurrentStack ),
@@ -95,11 +115,11 @@ S2 = [[], [["MyUsername1", "MyPassword1", 0]], [], []]
 
 % ------------------  Login de usuario  ------------------
 
-validateLogin(CurrentUsers, Username, Password):- 
+validateLogin(CurrentUsers, Username, Password) :- 
     exists([Username, Password, _], CurrentUsers),
     true.
 
-loginUserInStack(CurrentStack, Username, Password, UpdatedStack):-
+loginUserInStack(CurrentStack, Username, Password, UpdatedStack) :-
 	stack( _, CurrentUsers, _, _, CurrentStack),
 	validateLogin(CurrentUsers, Username, Password ),
 	stack( _, _, CurrentQuestions, _, CurrentStack ),
@@ -136,7 +156,7 @@ addQuestion( [CurrentQuestion|NextCurrentQuestions], [Author|_],
   appendList( [NewQuestion],[CurrentQuestion|NextCurrentQuestions], 
               UpdatedQuestions ). %Agregar la pregunta (lista) a la lista de preguntas. Agregar una lista a una lista.
 
-ask(CurrentStack, Fecha, TextoPregunta, ListaEtiquetas, UpdatedStack):-
+ask(CurrentStack, Fecha, TextoPregunta, ListaEtiquetas, UpdatedStack) :-
   stack(_, CurrentUsers, _ ,_ , CurrentStack),
   stack(CurrentLoggedUser, _, _, _, CurrentStack),
   lengthList(CurrentLoggedUser, Length), Length = 1,  % Solo puedo hacer la pregunta si estoy logueado
@@ -189,10 +209,10 @@ addAnswer( [CurrentAnswer|CurrentNextAnswers], QuestionId, [Author|_],
 validateQuestionId(Questions,QuestionId) :- 
     exists( [QuestionId,_,_,_,_,_,_], Questions ),true.
 
-answer(CurrentStack, Fecha, IdPregunta, TextoRespuesta, ListaEtiquetas, UpdatedStack):-
+answer(CurrentStack, Fecha, IdPregunta, TextoRespuesta, ListaEtiquetas, UpdatedStack) :-
   stack( _, CurrentUsers, _, _, CurrentStack ),
   stack( CurrentLoggedUser, _, _, _, CurrentStack ),
-  lengthList(CurrentLoggedUser, Length),Length = 1,
+  lengthList(CurrentLoggedUser, Length), Length = 1,
   stack( _, _, CurrentQuestions, _, CurrentStack),
   validateQuestionId( CurrentQuestions, IdPregunta),
   stack( _, _, _, CurrentAnswers, CurrentStack),
@@ -216,3 +236,4 @@ S3 = [[], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]]
 S4 = [["MyUsername1"], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]], [[1, "MyUsername2", "2020-01-01", "¿Cuáles son los lenguajes más cool del 2021?", 0, "abierta", ["programming languages", "computer science"]]], []]
 S5 = [[], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]], [[1, "MyUsername2", "2020-01-01", "¿Cuáles son los lenguajes más cool del 2021?", 0, "abierta", ["programming languages", "computer science"]]], [[1, 1, "MyUsername1", "2021-03-11", "Probablemente Prolog no", 0, "no", ["programming languages", "computer science"]]]]
 */
+
