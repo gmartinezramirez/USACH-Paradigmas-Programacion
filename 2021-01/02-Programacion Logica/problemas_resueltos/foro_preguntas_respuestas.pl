@@ -253,11 +253,39 @@ singleUserToString([Username, Password, Reputation], UserStringRepresentation) :
 
 usersListToString(_, [], []) :- !.
 
-usersListToString( User, [CurrentUser|NextCurrentUsers], 
+usersListToString( CurrentStrRepresentation, [CurrentUser|NextCurrentUsers], 
 				[ StrCurrentUser|StrNextCurrentUsers] ) :-
 	singleUserToString(CurrentUser, SingleUserStringRepresentation),
 	string_concat(SingleUserStringRepresentation, "\n", StrCurrentUser),
-	usersListToString(User, NextCurrentUsers, StrNextCurrentUsers).
+	usersListToString(CurrentStrRepresentation, NextCurrentUsers, StrNextCurrentUsers).
+
+/*
+ * Convertir pregunta (question) a string
+ * 
+*/
+
+
+singleQuestionToString([Id,Author,Date,Text,Votes,Status,Labels], QuestionStringRepresentation) :-
+	string_concat("ID:", Id, IdStr),
+	string_concat("Autor:", Author, AuthorStr),
+	string_concat("Fecha:", Date, DateStr),
+	string_concat("Texto pregunta:", Text, QuestionTextStr),
+	string_concat("Votos:", Votes, VotesStr),
+	string_concat("Estado:", Status, StatusStr),
+	atomics_to_string(Labels, LabelsStr),
+	string_concat("Labels:", LabelsStr, LabelsListStr),
+	atomic_list_concat(
+		[IdStr,AuthorStr,DateStr,QuestionTextStr,VotesStr,StatusStr,LabelsListStr],
+		'\n', QuestionsAtom),
+	atom_string(QuestionsAtom, QuestionStringRepresentation).
+
+questionsListToString(_,[],[]) :- !.
+
+questionsListToString( CurrentStrRepresentation, [CurrentQuestion|NextCurrentQuestions], 
+				[ StrCurrentQuestion|StrNextCurrentQuestions] ) :-
+	singleQuestionToString(CurrentQuestion, SingleQuestionStringRepresentation),
+	string_concat(SingleQuestionStringRepresentation, "\n", StrCurrentQuestion),
+	questionsListToString(CurrentStrRepresentation, NextCurrentQuestions, StrNextCurrentQuestions).
 
 /*
  * Convertir Stack a String
@@ -269,7 +297,11 @@ stackToString(CurrentStack, StackStringRepresentation) :-
 	usersListToString(_, CurrentUsers, UsersListStr),
 	atomic_list_concat(UsersListStr, '', UsersAtom),
 	atom_string(UsersAtom, UsersStr),
-	atomics_to_string([UsersStr],'', StackStringRepresentation).
+    stack(_, _ , CurrentQuestions, _, CurrentStack),
+	questionsListToString(_, CurrentQuestions, QuestionsList),
+	atomic_list_concat(QuestionsList,'',QuestionsAtom),
+	atom_string(QuestionsAtom,QuestionsStr),
+	atomics_to_string([UsersStr, QuestionsStr],'', StackStringRepresentation).
 
 /*
 * Consulta exitosa para crear el string del stack: copiar y pegar en interprete
@@ -288,6 +320,5 @@ S3 = [[], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]]
 S4 = [["MyUsername1"], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]], [[1, "MyUsername2", "2020-01-01", "¿Cuáles son los lenguajes más cool del 2021?", 0, "abierta", ["programming languages", "computer science"]]], []]
 S5 = [[], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]], [[1, "MyUsername2", "2020-01-01", "¿Cuáles son los lenguajes más cool del 2021?", 0, "abierta", ["programming languages", "computer science"]]], [[1, 1, "MyUsername1", "2021-03-11", "Probablemente Prolog no", 0, "no", ["programming languages", "computer science"]]]]
 CurrentStackInString =
-"Username: MyUsername1\nPassword: MyPassword1\nReputación: 0\nUsername: MyUsername2\nPassword: MyPassword2\nReputación: 0\n"
-
+"Username: MyUsername1\nPassword: MyPassword1\nReputación: 0\nUsername: MyUsername2\nPassword: MyPassword2\nReputación: 0\nID:1\nAutor:MyUsername2\nFecha:2020-01-01\nTexto pregunta:¿Cuáles son los lenguajes más cool del 2021?\nVotos:0\nEstado:abierta\nLabels:programming languagescomputer science\n"
 */
