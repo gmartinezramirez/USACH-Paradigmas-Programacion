@@ -67,6 +67,14 @@ question(Id, Author, Date, Text, Votes, Status, Labels,
 % NewQuestion = [1, "MyUsername1", "2020-12-02", "¿Cómo funciona Prolog?", 10, "abierta", ["prolog", "logic programming"]]
 
 
+% ------------------  TDA Answer (respuesta)  ------------------
+
+answer( Id, QuestionId, Author, Date, Text, Votes, AcceptStatus, Labels,
+       [Id, QuestionId, Author, Date, Text, Votes, AcceptStatus, Labels]).
+
+%answer(1,1,"MyUsername1","2021-06-12","Ni idea de Prolog, pero es sabroson",-10,"abierta",["prolog", "logic programming", "sabroson"], NewAnswerToQuestionId1).
+% NewAnswerToQuestionId1 = [1, 1, "MyUsername1", "2021-06-12", "Ni idea de Prolog, pero es sabroson", -10, "abierta", ["prolog", "logic programming", "sabroson"]]
+
 % ------------------  Registro de usuarios  ------------------
 
 % addRegisteredUser(UsersIn, Username, Password, UsersOut).
@@ -106,23 +114,24 @@ S2 = [[], [["MyUsername1", "MyPassword1", 0]], [], []]
 
 % ------------------  Login de usuario  ------------------
 
-validateLogin(CurrentUsers, Username, Password) :- 
+validateLogin(CurrentUsers, Username, Password):- 
     exists([Username, Password, _], CurrentUsers),
     true.
 
-loginUserInStack(CurrentStack, Username, Password, UpdatedStack) :-
+loginUserInStack(CurrentStack, Username, Password, UpdatedStack):-
 	stack( _, CurrentUsers, _, _, CurrentStack),
 	validateLogin(CurrentUsers, Username, Password ),
 	stack( _, _, CurrentQuestions, _, CurrentStack ),
 	stack( _, _, _, CurrentAnswers, CurrentStack ),
 	stack( [Username], CurrentUsers, CurrentQuestions, CurrentAnswers, UpdatedStack ).
 
+
 % ------------------  Agregar una pregunta al stack  ------------------
 /* TDA Question: [Id, Author, Date, Text, Votes, Status, Labels]).
  * 
  * Por defecto: 
- * 	Una pregunta se agrega con el estado "abierta" (estado="abierta")
- * 	Una pregunta se agrega con 0 votos (votos=0)
+ * 	Una nueva pregunta se agrega con el estado "abierta" (estado="abierta")
+ * 	Una nueva pregunta se agrega con 0 votos (votos=0)
  * Meta primaria:
  * 	ask(CurrentStack, Fecha, TextoPregunta, ListaEtiquetas, UpdatedStack).
  * Metas secundarias: 
@@ -131,36 +140,96 @@ loginUserInStack(CurrentStack, Username, Password, UpdatedStack) :-
  * 
 */
 
-setNewQuestionId(Question, NewId) :- 
+setNewQuestionId(Question, NewId):- 
     question(Id, _ , _, _, _, _, _, Question),
     NewId is Id + 1.
 
 % Si es la primera pregunta agregada, entonces tiene Id=1
-addQuestion([],[Author|_], Date, Text, Labels, [Q]) :- 
+addQuestion([],[Author|_], Date, Text, Labels, [Q]):- 
     question(1, Author, Date, Text, 0, "abierta", Labels,Q).
 
-addQuestion([H|T],[Author|_],Date,Text,Labels,Q) :-
+addQuestion([H|T],[Author|_],Date,Text,Labels,Q):-
   setNewQuestionId(H,NewId),
   question( NewId, Author, Date, Text, 0, "abierta", Labels, Question), % Pregunta se agrega con 0 votos
   appendList([Question],[H|T],Q). %Agregar la pregunta (lista) a la lista de preguntas. Agregar una lista a una lista.
 
-ask(CurrentStack, Fecha, TextoPregunta, ListaEtiquetas, UpdatedStack) :-
-  stack( _, CurrentUsers, _ ,_ , CurrentStack ),
-  stack( CurrentLoggedUser, _, _, _, CurrentStack ),
-  lengthList( CurrentLoggedUser, Length ), Length = 1,  % Solo puedo hacer la pregunta si estoy logueado
-  stack( _, _, CurrentQuestions, _, CurrentStack ),
-  stack( _ , _, _, CurrentAnswers, CurrentStack ),
-  addQuestion( CurrentQuestions, CurrentLoggedUser, 
-               Fecha, TextoPregunta, ListaEtiquetas, UpdatedQuestions ),
-  stack( [], CurrentUsers, UpdatedQuestions, CurrentAnswers, UpdatedStack ).
+ask(CurrentStack, Fecha, TextoPregunta, ListaEtiquetas, UpdatedStack):-
+  stack(_, CurrentUsers, _ ,_ , CurrentStack),
+  stack(CurrentLoggedUser, _, _, _, CurrentStack),
+  lengthList(CurrentLoggedUser, Length), Length = 1,  % Solo puedo hacer la pregunta si estoy logueado
+  stack(_, _, CurrentQuestions, _, CurrentStack),
+  stack(_ , _, _, CurrentAnswers, CurrentStack),
+  addQuestion(CurrentQuestions, CurrentLoggedUser, 
+              Fecha, TextoPregunta, ListaEtiquetas, UpdatedQuestions),
+  stack([], CurrentUsers, UpdatedQuestions, CurrentAnswers, UpdatedStack).
 
 /*
-* Login exitoso de usuario previamente registrado en el sistema
+* Consulta exitosa para hacer una pregunta: copiar y pegar en interprete
+
 stack([],[["MyUsername1","MyPassword1",0],["MyUsername2","MyPassword2",0]],[],[], S1),
 loginUserInStack(S1,"MyUsername1","MyPassword1",S2),
 ask(S2, "2021-06-05","¿Cuáles son los lenguajes más populares el 2021?", ["programming languages", "computer science"], S3).
 
+% Resultado
 S1 = [[], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]], [], []]
 S2 = [["MyUsername1"], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]], [], []]
 S3 = [[], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]], [[1, "MyUsername1", "2021-06-05", "¿Cuáles son los lenguajes más populares el 2021?", 0, "abierta", ["programming languages", "computer science"]]], []]
+*/
+
+% ------------------  Agregar una respuesta a una pregunta del stack  ------------------
+/* TDA Answer: [Id, QuestionId, Author, Date, Text, Votes, AcceptStatus, Labels]).
+ * 
+ * Por defecto: 
+ * 	Una nueva respuesta a una pregunta, se agrega 0 votes
+ * 	Una nueva respuesta a una pregunta, se agrega con el AcceptStatus "no" indicando que todavia no ha sido aceptada
+ * Meta primaria:
+ * 	answer(CurrentStack, Fecha, IdPregunta, TextoRespuesta, ListaEtiquetas, UpdatedStack).
+ * Metas secundarias: 
+ *  validateQuestionId(CurrentQuestions, QuestionId).
+ *  addAnswer(CurrentAnswers, QuestionId, Author, Date, Text, Labels, UpdatedAnswers)
+ *  setNewAnswerId(Answer, NewId)
+*/
+
+setNewAnswerId(Answer, NewId):- 
+    answer(Id,_,_,_,_,_,_,_,Answer),
+    NewId is Id + 1.
+
+addAnswer( [], QuestionId, [Author|_], Date, Text, Labels, [NewAnswer] ) :- 
+    answer( 1, QuestionId, Author, Date, Text, 0, "no", Labels, NewAnswer ).
+
+addAnswer( [CurrentAnswer|CurrentNextAnswers], QuestionId, [Author|_], 
+          Date, Text, Labels, UpdatedAnswers ) :-
+  setNewAnswerId(CurrentAnswer, NewId),
+  answer(NewId, QuestionId, Author, Date, Text, 0, "no", Labels, NewAnswer),
+  appendList( [NewAnswer], [CurrentAnswer|CurrentNextAnswers], UpdatedAnswers ).
+
+validateQuestionId(Questions,QuestionId) :- 
+    exists( [QuestionId,_,_,_,_,_,_], Questions ),true.
+
+answer(CurrentStack, Fecha, IdPregunta, TextoRespuesta, ListaEtiquetas, UpdatedStack):-
+  stack( _, CurrentUsers, _, _, CurrentStack ),
+  stack( CurrentLoggedUser, _, _, _, CurrentStack ),
+  lengthList(CurrentLoggedUser, Length),Length = 1,
+  stack( _, _, CurrentQuestions, _, CurrentStack),
+  validateQuestionId( CurrentQuestions, IdPregunta),
+  stack( _, _, _, CurrentAnswers, CurrentStack),
+  addAnswer( CurrentAnswers, IdPregunta, CurrentLoggedUser, 
+            Fecha, TextoRespuesta, ListaEtiquetas, UpdatedAnswers ),
+  stack( [], CurrentUsers, CurrentQuestions, UpdatedAnswers, UpdatedStack ).
+
+/*
+* Consulta exitosa para crear una respuesta de una pregunta: copiar y pegar en interprete
+
+stack([],[["MyUsername1","MyPassword1",0],["MyUsername2","MyPassword2",0]],[],[], S1),
+loginUserInStack(S1,"MyUsername2","MyPassword2",S2),
+ask(S2, "2020-01-01","¿Cuáles son los lenguajes más cool del 2021?", ["programming languages", "computer science"], S3),
+loginUserInStack(S3,"MyUsername1","MyPassword1",S4),
+answer(S4,"2021-03-11",1,"Probablemente Prolog no",["programming languages", "computer science"],S5).
+
+% Resultado
+S1 = [[], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]], [], []]
+S2 = [["MyUsername2"], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]], [], []]
+S3 = [[], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]], [[1, "MyUsername2", "2020-01-01", "¿Cuáles son los lenguajes más cool del 2021?", 0, "abierta", ["programming languages", "computer science"]]], []]
+S4 = [["MyUsername1"], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]], [[1, "MyUsername2", "2020-01-01", "¿Cuáles son los lenguajes más cool del 2021?", 0, "abierta", ["programming languages", "computer science"]]], []]
+S5 = [[], [["MyUsername1", "MyPassword1", 0], ["MyUsername2", "MyPassword2", 0]], [[1, "MyUsername2", "2020-01-01", "¿Cuáles son los lenguajes más cool del 2021?", 0, "abierta", ["programming languages", "computer science"]]], [[1, 1, "MyUsername1", "2021-03-11", "Probablemente Prolog no", 0, "no", ["programming languages", "computer science"]]]]
 */
