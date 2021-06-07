@@ -12,16 +12,16 @@ agregarProducto( [Nombre, Precio], [], [[Nombre, Precio, 1]] ).
 % Caso: Cuando ya existe el producto en la lista de productos
 %       Entonces se aumenta en uno la cantidad actual
 agregarProducto( [ Nombre, Precio ], 
-                 [ [Nombre, Precio, CantidadActual] | RestoProductos], 
-                 [ [Nombre, Precio, NuevaCantidad]  | RestoProductos] ) :- 
+                 [ [Nombre, Precio, CantidadActual] | SiguientesProductos], 
+                 [ [Nombre, Precio, NuevaCantidad]  | SiguientesProductos] ) :- 
     NuevaCantidad is CantidadActual + 1, !.
 
 % Cuando el producto no existe en la lista actual de productos
 % y se agrega a una lista que ya contiene otros productos
 agregarProducto( [ Nombre, Precio ],
-                 [ [LNombre, LPrecio, LCantidad] | RestoProductos ],
+                 [ [LNombre, LPrecio, LCantidad] | SiguientesProductos ],
                  [ [LNombre, LPrecio, LCantidad] | NuevoProductos] ) :- 
-    agregarProducto( [Nombre, Precio], RestoProductos, NuevoProductos ).
+    agregarProducto( [Nombre, Precio], SiguientesProductos, NuevoProductos ).
 
 % agregarProducto(["Pan", 500], [], L).
 % agregarProducto(["Pan", 500], [], L), agregarProducto(["Carne", 700], L, NL).
