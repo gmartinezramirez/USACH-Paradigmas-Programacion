@@ -22,32 +22,27 @@
 %insertaTitulo(TitulosIn,Titulo,TitulosOut).
 %addTituloCatalogo(CatalogosIn,TituloFull,CatalagosOut)
 
-% Insertar titulo sin duplicados
-insertaTitulo( [],T,[T] ).
 
-insertaTitulo( [ [T,D,N]|Ts ], 
-			   [ T,_,_ ], 
-			   [ [T,D,N]|Ts ] ) :- !.
+%insertaTitulo(TitulosIn,Titulo,TitulosOut).
+% TitulosIn: Lista de titulos actuales, también puede llamarse: TitulosActuales
+% Titulo: Titulo a agregar
+% TitulosOut: lista de titulos con el nuevo titulo agregado, también puede llamarse: TitulosActualizados
 
-insertaTitulo( [ H|Ts ],
-			   [ T,D,N ], 
-			   [ H|T2 ]):-
-	insertaTitulo( Ts, [T,D,N], T2 ).
+insertaTitulo([],T,[T]).
 
-% Agregar un titulo al catalogo
-addTituloCatalogo( [],
-				   [ C,T,D,N ],
-				   [ [ C, [[T,D,N]] ] ]).
+insertaTitulo([[T,D,N]|Ts],[T,_,_],[[T,D,N]|Ts]):-!.
 
-addTituloCatalogo( [ [C,Ts]|Cs ],
-				   [ C,T,D,N ],
-				   [ [C,Ts2]|Cs ] ) :-
-	insertaTitulo( Ts,[T,D,N],Ts2 ).
+insertaTitulo([H|Ts],[T,D,N],[H|T2]):-
+	insertaTitulo(Ts,[T,D,N],T2).
 
-addTituloCatalogo( [ [C2,Ts]|Cs ],
-				   [ C,T,D,N ],
-				   [ [C2,Ts]|Cs2 ] ) :-
-	addTituloCatalogo( Cs, [C,T,D,N], Cs2 ).
+addTituloCatalogo([],[C,T,D,N],[[C,[[T,D,N]]]]).
+
+addTituloCatalogo([[C,Ts]|Cs],[C,T,D,N],[[C,Ts2]|Cs]):-
+	insertaTitulo(Ts,[T,D,N],Ts2).
+
+addTituloCatalogo([[C2,Ts]|Cs],[C,T,D,N],[[C2,Ts]|Cs2]):-
+	addTituloCatalogo(Cs,[C,T,D,N],Cs2).
+
 
 
 %1b.
