@@ -58,8 +58,10 @@ costoTotalDeOrigenADestino(Origen, Destino, CostoTotal):-
 	costoTotalDeOrigenADestino(Intermedio, Destino, Costo2),
 	CostoTotal is Costo1 + Costo2.
 
+%costoTotalDeOrigenADestino(a, d, CostoTotal).
 
-% Pregunta d: ¿cuales ciudades se recorren para llegar de una ciudad a otra?
+
+% Pregunta d: obtener todos los caminos entre punto inicio y punto final, junto con el costo total de este
 % encontrarUnCamino entre un Punto Inicio y Punto final, sumando los costos
 %encontrarUnCamino(Inicio, Destino, CostoTotal, CaminoEncontrado, []).
 %https://www.swi-prolog.org/pldoc/man?predicate=%5C%2B/1
@@ -72,3 +74,6 @@ encontrarUnCamino(Inicio, Destino, CostoTotal, [Inicio|SiguientesPuntos], V) :-
 	conecta(Inicio, Z, Costo1),
 	encontrarUnCamino(Z, Destino, Costo2, SiguientesPuntos, [Inicio|V]),
 	CostoTotal is Costo1 + Costo2.
+
+
+%encontrarUnCamino(a, d, CostoTotal, CaminoEncontrado, [])
