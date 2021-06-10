@@ -1,17 +1,19 @@
 package TDA;
 
+import java.util.List;
+
 public class Person {
 
     String name;
     String lastname;
     int age;
-    Pet pet;
+    List<Pet> pets;
 
-    public Person(String name, String lastname, int age, Pet pet) {
+    public Person(String name, String lastname, int age, List<Pet> pets) {
         this.name = name;
         this.lastname = lastname;
         this.age = age;
-        this.pet = pet;
+        this.pets = pets;
     }
 
     public String getName() {
@@ -38,12 +40,12 @@ public class Person {
         this.age = age;
     }
 
-    public Pet getPet() {
-        return pet;
+    public List<Pet> getPets() {
+        return pets;
     }
 
-    public void setPet(Pet pet) {
-        this.pet = pet;
+    public void setPets(List<Pet> pets) {
+        this.pets = pets;
     }
 
     @Override
@@ -52,7 +54,7 @@ public class Person {
                 "name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", age=" + age +
-                ", pet=" + pet +
+                ", pets=" + pets +
                 '}';
     }
 }
