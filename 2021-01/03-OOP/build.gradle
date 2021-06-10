@@ -1,0 +1,13 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'com.paradigmas.main.Main'
+
+group 'com.paradigmas'
+version '1.0-SNAPSHOT'
+
+run {
+    standardInput = System.in
+}
+
+version = '1.2.1'
