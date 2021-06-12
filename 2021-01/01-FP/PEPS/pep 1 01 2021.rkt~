@@ -1,0 +1,169 @@
+#lang racket
+
+; Pregunta 2
+
+;; a) Implementar TDAs necesarios (2 ptos)
+
+;; TDA sistema pinguino
+; Constructor
+;  No es necesario definir un TDA sistema pinguino
+; Esto ya que en la PEP se pide: Implementar las funciones necesarias,
+; no implementarlo realmente. De igual forma, un posible TDA queda así:
+;(define (sistema-pinguino autores libros usuarios)
+;  (list autores libros usuarios))
+
+;; TDA Autor (0.5 ptos)
+; Constructor
+(define (autor nombre libros-publicados)
+  (list nombre libros-publicados))
+
+;; TDA Libro (0.5 ptos)
+; Constructor
+(define (libro nombre-autor nombre-libro precio-minimo precio-sugerido total-vendidos numero-paginas tags)
+  (list nombre-autor nombre-libro precio-minimo precio-sugerido total-vendidos numero-paginas tags))
+
+;; TDA Usuario (0.5 pto)
+; Constructor
+(define (usuario username libros-comprados)
+  (list username libros-comprados))
+
+(define (lista-autores . autores) autores)
+(define (lista-libros . libros) libros)
+(define (lista-usuarios . usuarios) usuarios)
+
+;; Selectores (0.5 pto)
+;; Estos selectores eran los minimos necesarios, solo bastaba con estos
+(define (get-username usuario) (car usuario))
+(define (get-libros-comprados usuario) (cadr usuario))
+
+(define (get-precio-minimo libro) (caddr libro))
+(define (get-total-vendidos libro) (caddddr libro))
+(define (get-numero-paginas libro) (cadddddr libro))
+
+
+;; b) Registrar un nuevo autor en el sistema (5 ptos)
+
+(define (registro-autor nombre libros-publicados autores)
+  (if (null? autores)
+      (cons (autor nombre libros-publicados) null)
+      (cons (car autores) (registro-autor nombre libros-publicados (cdr autores)))
+      )
+  )
+
+;; c) Permitir al autor registrar un nuevo libro de su autoría en el sistema (5 ptos)
+
+(define registro-libro
+  (lambda (nombre-autor nombre-libro precio-minimo precio-sugerido total-vendidos numero-paginas tags libros-publicados)
+    (if (null? libros-publicados)
+        (cons (libro nombre-autor
+                     nombre-libro
+                     precio-minimo
+                     precio-sugerido
+                     total-vendidos
+                     numero-paginas
+                     tags) null)
+        (cons (car libros-publicados)
+              (registro-libro nombre-autor
+                              nombre-libro
+                              precio-minimo
+                              precio-sugerido
+                              total-vendidos
+                              numero-paginas
+                              tags
+                              (cdr libros-publicados))))))
+
+;; d) Permitir a un usuario comprar (adquirir) un libro de la lista de libros existentes en el sistema (5 ptos)
+
+;; Definir funcion de agregar (1 pto)
+(define (agregar lista elemento)
+  (if (null? lista)
+      (cons elemento null)
+      (cons (car lista) (agregar (cdr lista) elemento)))
+  )
+
+;; Definir funcion que verifica si el elemento se encuentra en la lista (1 pto)
+(define (contiene? lista elemento)
+  (cond
+    [(null? lista) #f]
+    [(equal? (car lista) elemento) #t]
+    [else (contiene? (cdr lista) elemento)]))
+
+;; Funcion de adquirir el libro (3 ptos)
+
+;; Sin cambiar la cantidad de libros vendidos (2 ptos)
+(define (adquirir-libro usuario-comprador libro-a-adquirir sistema)
+  (cond
+    [(contiene? sistema libro-a-adquirir)
+     (usuario (get-username usuario-comprador)
+              (agregar (get-libros-comprados usuario-comprador) libro-a-adquirir))]
+    [usuario-comprador]))
+
+;; Considerando cambiar la cantidad de libros vendidos (asignar puntaje completo, 3 ptos)
+(define (adquirir-libro usuario-comprador libro-a-adquirir sistema)
+  (cond
+    [(contiene? sistema libro-a-adquirir)
+     (usuario (get-username usuario-comprador)
+              (agregar (get-libros-comprados usuario-comprador)
+                       (libro (+ 1 (get-total-vendidos libro-a-adquirir) total-vendidos) ; Constructor de libro pero con el totalvendidos + 1
+                              )
+                       ))]
+    [usuario-comprador]))
+
+;; e)Implemente las funciones necesarias que permitan filtrar libros en el sistema de acuerdo a (13 ptos)
+;;; i) precio minimo
+;;; ii) precio maximo
+;;; iii) numero de paginas
+;;; iv) un valor entre el precio minimo y el precio maximo
+
+; Esto se puede abordar creando una función de filtro que reciba los criterios
+
+;; Opcion 1 de un filtro
+(define mi-filtro
+  (lambda (criterio lista)
+    (cond
+      [(null? lista) null]
+      [(criterio(car lista))
+       (cons (car lista) (mi-filtro criterio (cdr lista)))]
+      [else (mi-filtro criterio (cdr lista))])))
+
+;; Opcion 2 de un filtro
+(define (filtro-libros libros criterio)
+  (if (null? libros)
+      null
+      (if (criterio (car libros))
+          (cons (car libros) (filtro-libros (cdr libros) criterio))
+          (filtro-libros (cdr libros) criterio))))
+
+;;; i) precio minimo
+;; Retornar todos los libros cuyo precio sea mayor al precio minimo
+
+(define (criterio-precio-min libro min)
+  (if (>= (get-precio-minimo libro) min)
+      #t
+      #f))
+
+
+;;; ii) precio maximo
+
+(define (criterio-precio-max libro max)
+  (if (<= (get-precio-minimo libro) max)
+      #t
+      #f))
+
+;;; iii) numero de paginas
+
+;; Acá queda a elección del estudiante como quiere filtrarlo.
+;; Puede ser: filtrar los libros que tengan una cantidad menor, o mayor, o igual
+(define (criterio-max-numero-paginas libro numero-paginas)
+  (if (<= (get-numero-paginas libro) max)
+      #t
+      #f))
+
+
+;;; iv) un valor entre el precio minimo y el precio maximo
+
+(define (criterio-precio-min-max libro min max)
+  (if (and (<= (get-precio-minimo libro) max)
+           (>= (get-precio-minimo libro) min))
+      #t
+      #f))
