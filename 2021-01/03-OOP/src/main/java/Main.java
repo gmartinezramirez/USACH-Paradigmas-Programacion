@@ -1,25 +1,24 @@
-import TDA.Person;
-import TDA.Pet;
-
-import java.util.Arrays;
-import java.util.List;
+import TDA.Mascota;
+import TDA.Persona;
 
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("hola a todos");
-        Pet mascota = new Pet("migato");
-        Pet segundaMascota = new Pet("miotrogato");
-        List<Pet> pets = Arrays.asList(mascota, segundaMascota);
 
-        Person persona = new Person("gonzalo", "martinez", 29, pets);
-        System.out.println(persona.getAge());
-        System.out.println(persona.getPets());
+        Mascota mascota = new Mascota("miGato");
+        Persona persona = new Persona("Gonzalo", 29, mascota);
+        System.out.println(persona.getNombre());
+        System.out.println(persona.getEdad());
+        System.out.println(persona.toString());
+        persona.setEdad(20);
+        System.out.println(persona.getEdad());
         System.out.println(persona.toString());
 
-        for (Pet pet : persona.getPets()) {
-            System.out.println(pet.getName());
-        }
+        System.out.println(persona.getMascota().getNombre());
 
+        // sout  tab
+        //Anda a la libreria interna System, a la clase out y ocupa el metodo println
+        // Print new line
+        //persona.getNombre();
     }
 }
