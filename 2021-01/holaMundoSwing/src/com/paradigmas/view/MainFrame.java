@@ -24,11 +24,14 @@ public class MainFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        // Con e.getSource se puede discernir quien ejecuto que evento, es decir, se obtiene el origen del evento
         if(e.getSource() == botonConAccion) {
             String message = "Hola, ejecute una accion";
             JOptionPane.showMessageDialog(this, message);
         }
         if(e.getSource() == botonAbrirOtraVentana) {
+            //Si queremos que esta ventana (ventana principal) se oculte cuando se abra una nueva ventana
+            //Es necesario descomentar this.setVisible(false)
             //this.setVisible(false);
             new AnotherFrame().setVisible(true);
         }
@@ -47,6 +50,7 @@ public class MainFrame extends JFrame implements ActionListener {
         // Tipo de layout: https://docs.oracle.com/javase/tutorial/uiswing/layout/visual.html
         setLayout(new FlowLayout());
 
+        // Se asocia actionListener a los componentes para que escuchen los eventos de estos
         botonConAccion.addActionListener(this);
         botonAbrirOtraVentana.addActionListener(this);
     }

@@ -20,6 +20,7 @@ public class AnotherFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == botonVolver) {
+            //Volver significa ocultar la ventana actual (setVisible false) y crear una nueva ventana visible
             this.setVisible(false);
             new MainFrame().setVisible(true);
         }
