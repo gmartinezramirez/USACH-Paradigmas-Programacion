@@ -4,11 +4,11 @@
 
 ## Docencia e información administrativa
 
-- **Instructor sección D4**: [Gonzalo Martinez](gonzalo.martinez@usach.cl), Profesor adjunto, Msc Universidad de Santiago de Chile
+- **Instructor sección A1**: [Gonzalo Martinez](gonzalo.martinez@usach.cl), Profesor adjunto, Msc Universidad de Santiago de Chile
 - **Institución**: Universidad de Santiago de Chile
 - **Horario**:
 	- Lunes y Martes Módulo 1 (8:00 - 9:00 am)
-	- Miércoles Módulo 6 (17:00 - 18:00 hrs)
+	- Miércoles Módulo 6 (17:10 - 18:10 hrs)
 - **Sala de clases**: Link de zoom disponible en CampusVirtual
 
 ## Contenido por semana
