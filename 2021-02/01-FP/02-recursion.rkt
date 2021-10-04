@@ -140,9 +140,9 @@
 ; Ejemplo: (sumatoria 10)
 (define sumatoria
   (lambda (x)
-    (if (zero? x)
-        0
-        (+ x (sumatoria (- x 1))))))
+    (cond
+      [(zero? x) 0]
+      [else (+ x (sumatoria (- x 1)))])))
 
 
 ; Tail Recursion
