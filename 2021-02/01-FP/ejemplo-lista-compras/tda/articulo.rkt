@@ -6,6 +6,7 @@
 (provide get-id get-nombre get-precio)
 (provide set-id set-nombre set-precio)
 (provide articulo->string)
+(provide es-precio-mayor-a?)
 
 ; TDA Articulo ;
 
@@ -96,6 +97,7 @@
 
 ;; Descripcion: Retorna la representacion en string de un articulo
 ;;              ESTO ES UN ENFOQUE DECLARATIVO
+;;              SE UTILIZA HIGH ORDER FUNCTIONS, MAP
 ;; Dom: articulo
 ;; Rec: string
 ;; Ejemplo:
@@ -105,3 +107,23 @@
   (lambda (articulo)
     (string-join
      (map if-element-is-number-then->string articulo) " ")))
+
+
+;; Funciones para filtrar ;;
+
+;; Descripcion: Retorna un boolean que indica si el precio de un articulo es mayor a X
+;;              FUNCIONA DE FORMA CURRIFICADA
+;;              CURRIFICACION
+;; Dom: number articulo
+;; Rec: boolean
+;; Ejemplo:
+;; - Entrada: ((es-precio-mayor-a? 5000) (articulo 0 "keyboard" 7000))
+;; - Salida: #t
+;; - Entrada: ((es-precio-mayor-a? 8000) (articulo 0 "keyboard" 7000))
+;; - Salida: #f
+(define es-precio-mayor-a?
+  (lambda (precio)
+    (lambda (articulo)
+      (cond
+        [(> (get-precio articulo) precio) #t]
+        [else #f]))))

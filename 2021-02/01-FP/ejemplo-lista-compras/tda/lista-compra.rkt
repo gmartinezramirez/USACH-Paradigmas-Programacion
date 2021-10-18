@@ -45,6 +45,18 @@
     (car (reverse lst))))
 
 
+;; Descripcion: Retorna todos los elementos filtrados por un precio
+;;              ENFOQUE DECLARATIVO
+;; Dom: lista
+;; Rec: articulo
+;; Ejemplo:
+;; - Entrada: (get-articulos-con-precio-mayor-a (list (articulo 0 "keyboard" 7000) (articulo 1 "yogurth" 5500)) 6000)
+;; - Salida: '(1 "yogurth" 100)
+(define get-articulos-con-precio-mayor-a
+  (lambda (lst precio)
+    (filter (es-precio-mayor-a? precio) lst)))
+
+
 ;; Capa modificador ;;
 
 ;; Descripcion: Agrega un nuevo articulo por cabeza (head) a una lista de articulos
