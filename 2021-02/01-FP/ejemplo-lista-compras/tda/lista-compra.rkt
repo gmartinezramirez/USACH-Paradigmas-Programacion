@@ -5,6 +5,10 @@
 
 (provide lista-articulos)
 (provide add-articulo-head)
+(provide lst-articulo->string)
+(provide add-articulo-autoincrement-id)
+(provide get-articulos-con-precio-mayor-a)
+(provide obtener-suma-de-todos-los-precios)
 
 ; TDA Lista de compras ;
 
