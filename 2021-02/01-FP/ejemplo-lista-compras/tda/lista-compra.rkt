@@ -47,6 +47,8 @@
 
 ;; Descripcion: Retorna todos los elementos filtrados por un precio
 ;;              ENFOQUE DECLARATIVO
+;;              SE UTILIZA HIGH ORDER FUNCTIONS Y CURRIFICACION
+;;              USO DE FILTER
 ;; Dom: lista
 ;; Rec: articulo
 ;; Ejemplo:
