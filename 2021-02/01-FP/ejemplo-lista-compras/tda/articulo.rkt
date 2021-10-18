@@ -7,6 +7,7 @@
 (provide set-id set-nombre set-precio)
 (provide articulo->string)
 (provide es-precio-mayor-a?)
+(provide operacion-sumar-y-acumular-precios-articulos)
 
 ; TDA Articulo ;
 
@@ -127,3 +128,18 @@
       (cond
         [(> (get-precio articulo) precio) #t]
         [else #f]))))
+
+
+;; Funciones para reducir ;;
+
+;; Descripcion: Funcion que va acumulando el valor de los precios de articulo
+;; Dom: articulo X number
+;; Rec: number
+;; Ejemplo:
+;; - Entrada: (operacion-sumar-y-acumular-precios-articulos (articulo 0 "keyboard" 7000) 0)
+;; - Salida: 7000
+;; - Entrada: (operacion-sumar-y-acumular-precios-articulos (articulo 0 "keyboard" 7000) 3000)
+;; - Salida: 10000
+(define operacion-sumar-y-acumular-precios-articulos
+  (lambda (articulo acc)
+    (+ (get-precio articulo) acc)))

@@ -1,6 +1,7 @@
 #lang racket
 
 (require "articulo.rkt")
+(require "operaciones-tda.rkt")
 
 (provide lista-articulos)
 (provide add-articulo-head)
@@ -115,3 +116,17 @@
   (lambda (lst-articulo)
     (string-join
      (map articulo->string lst-articulo) " | ")))
+
+
+;; Funciones reductoras sobre una lista de compras ;;
+
+;; Descripcion: Retorna la representacion en string de una lista de articulos
+;;              ESTO ES UN ENFOQUE DECLARATIVO
+;; Dom: list
+;; Rec: string
+;; Ejemplo:
+;; - Entrada: (obtener-suma-de-todos-los-precios (list (articulo 0 "keyboard" 7000) (articulo 1 "John Petrucci Guitar" 2560) (articulo 2 "Vinyl" 500)))
+;; - Salida: 10060
+(define obtener-suma-de-todos-los-precios
+  (lambda (lst)
+    (reduce operacion-sumar-y-acumular-precios-articulos lst 0)))
