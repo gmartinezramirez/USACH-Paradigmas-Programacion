@@ -20,6 +20,31 @@
 (define (lista-articulos . articulos) articulos)
 
 
+;; Capa selector ;;
+
+;; Descripcion: Retorna primer elemento de una lista
+;; Dom: lista
+;; Rec: articulo
+;; Ejemplo:
+;; - Entrada: (get-first-element (list (articulo 0 "keyboard" 7000) (articulo 1 "yogurth" 100)))
+;; - Salida: '(0 "keyboard" 7000)
+(define get-first-element
+  (lambda (lst)
+    (car lst)))
+
+
+;; Descripcion: Retorna ultimo elemento de una lista
+;;              ENFOQUE DECLARATIVO
+;; Dom: lista
+;; Rec: articulo
+;; Ejemplo:
+;; - Entrada: (get-last-element (list (articulo 0 "keyboard" 7000) (articulo 1 "yogurth" 100)))
+;; - Salida: '(1 "yogurth" 100)
+(define get-last-element
+  (lambda (lst)
+    (car (reverse lst))))
+
+
 ;; Capa modificador ;;
 
 ;; Descripcion: Agrega un nuevo articulo por cabeza (head) a una lista de articulos
@@ -47,6 +72,20 @@
 (define add-articulo-tail
   (lambda (lst articulo)
     (reverse (cons articulo (reverse lst)))))
+
+
+;; Descripcion: Agrega un nuevo articulo por cola (tail) a una lista de articulos
+;; Dom: list X string X string
+;; Rec: list X
+;; Ejemplo:
+;; - Entrada: (add-articulo-autoincrement-id (list (articulo 0 "tv" 1000) (articulo 1 "notebook dell" 30000)) "celular" 9999)
+;; - Salida: '((0 "tv" 1000) (1 "notebook dell" 30000) (2 "celular" 9999))
+(define add-articulo-autoincrement-id
+  (lambda (lst nombre precio)
+    (add-articulo-tail lst
+                       (articulo (+ (get-id (get-last-element lst)) 1)
+                                 nombre
+                                 precio))))
 
 
 ;; Capa otras funciones ;;
