@@ -115,10 +115,10 @@
   (lambda (n h2 h1 h0)
     (cond
       [ (< n 3) h2 ]
-      [ else (ackermann-tail (- n 1) ; n
-                             (+ h2 (* 2 h1) (* 3 h0)) ; h2
-                             h2 ; h1
-                             h1)]))) ; h0
+      [ else (ackermann-tail (- n 1)
+                             (+ h2 (* 2 h1) (* 3 h0))
+                             h2
+                             h1)])))
 
 ;; Usando if else
 ;(define ackermann-tail
