@@ -1,0 +1,17 @@
+#lang racket
+; Recursion
+
+;; Ackermann
+;; H(n) = n si n < 3
+;; H(n) = H(n - 1) + 2H(n - 2) + 3H(n - 3) si n >= 3
+
+
+; DOM: numero natural n <number>
+; REC: numero natural n <number>
+; Ejemplo: H(3)
+(define H
+  (lambda (n)
+    (if (< n 3) n
+        (+ (H(- n 1))
+           (* 2(H(- n 2)))
+           (* 3(H(- n 3)))))))

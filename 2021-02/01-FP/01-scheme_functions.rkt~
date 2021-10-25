@@ -1,0 +1,28 @@
+#lang racket
+
+; Hello world as a variable
+(define hello-as-value "Hello world")
+
+; Hello world as a function
+(define hello-as-function
+  (lambda ()
+    "Hello world"))
+
+; Descripcion: funcion que recibe un string y realiza un append a un
+;              str predefinido
+; DOM: str
+; REC: str
+; Ejemplo: (hello "gonzalo")
+(define say-hello
+  (lambda (name)
+    (string-append "Hello " name "!")))
+
+
+; Descripcion: funcion que recibe tres numeros y los suma
+; DOM: number X number X number
+; REC: number
+; Ejemplo: (sum-three-numbers 4 8 15)
+; Ejemplo: (sum-three-numbers 4 5.1 99.9)
+(define sum-three-numbers
+  (lambda (a b c)
+    (+ a b c)))

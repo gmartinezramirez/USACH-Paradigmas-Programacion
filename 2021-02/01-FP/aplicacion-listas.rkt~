@@ -1,0 +1,11 @@
+#lang racket
+
+; (member? (list 1 2 3) 3)
+(define member?
+  (lambda (lst x)
+    (cond
+      [(null? lst) #f]
+      [(eq? (car lst) x) #t]
+      [else
+       (member? (cdr lst) x)])))
+      
