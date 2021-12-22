@@ -19,9 +19,15 @@ nota_estudiante(2, 5.7, "Paradigmas de Programacion").
 nota_estudiante(2, 3.1, "Machine Learning").
 nota_estudiante(2, 1.1, "Data Science").
 
-%findNotaByNombreEstudiante(gmartinez, Nota).
-%findNotaByNombreEstudiante(gmartinez, 7).
-%findNotaByNombreEstudiante(gmartinez, 1).
+% Reglas
+% Meta principal: Nombre, Nota
+% Meta secundaria: Id
 findNotaByNombreEstudiante(Nombre, Nota) :-
     estudiante(Id, Nombre, _, _),
     nota_estudiante(Id, Nota, _).
+
+
+% Consultas:
+% findNotaByNombreEstudiante(gmartinez, Nota).
+% findNotaByNombreEstudiante(gmartinez, 7).
+% findNotaByNombreEstudiante(gmartinez, 1).
