@@ -1,6 +1,9 @@
 package com.gonzalo;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Vector;
 
 public class Main {
 
@@ -52,6 +55,39 @@ public class Main {
 
         //List<int> miLista = new CircularArray<>();
         //miLista.add(2);
+
+        Vendedor unEmpleado = new Guardia("Gonzalo");
+        Vendedor unGuardia = new Guardia ("Juan Segura");
+        unEmpleado.saludar();
+        unGuardia.saludar();
+
+        // Vector puede ser ArrayList, LinkedList
+        List miLista = new Vector();
+
+        miLista.add(unEmpleado);
+        miLista.add(unGuardia);
+
+
+        System.out.println(miLista.size());
+
+/*
+        //pseudo codigo
+        // Que
+        interface plataforma:
+            void addDocument;
+            void shareDocument;
+
+            // Como
+            public GDocs implements Plataforma;
+            public ParadigmaDocs implements Plataforma;
+            public MicrosoftDocs implements Plataforma;
+
+            // Main
+        Plataforma miPlataforma = MicrosoftDocs();
+        miPlataforma.addDocument(document1);
+        miPlataforma.addDocument(document2);
+        miPlataforma.shareDocument(document1);*/
+
 
     }
 }
