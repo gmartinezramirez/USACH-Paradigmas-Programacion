@@ -32,13 +32,24 @@
            (mi-map funcion (cdr lista)))]))
 
 ;; Función de filtrado
-(define es-manzana?
+(define es-manzana-o-sandia?
   (lambda (nombre)
     (cond
       [(eq? nombre "manzana") #t]
+      [(eq? nombre "sandia") #t]
       [else #f])))
+
+;if (a == b) ;; eq?
+
+(define mayor-a-50?
+  (lambda (numero)
+    (cond
+      [(> numero 50) #t]
+      [else #f])))
+
 
 ;; Función de map
 (define aplicar-descuento
   (lambda (precio)
     (- precio 50)))
+
