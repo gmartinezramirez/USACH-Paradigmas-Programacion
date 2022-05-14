@@ -1,0 +1,13 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'org.usach.template.Main'
+
+group 'org.usach.template'
+version '1.0-RELEASE'
+
+run{
+    standardInput = System.in
+}
+
+version = '1.2.1'
