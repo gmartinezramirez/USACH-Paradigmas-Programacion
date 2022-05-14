@@ -1,6 +1,6 @@
-package org.usach.template;
+package org.usach.template.Constants;
 
-public final class TextConstants {
+public final class Text {
     public static final String MAIN_MENU_DIALOG =
             " Main Menu: \n" +
             " ------------- \n" +

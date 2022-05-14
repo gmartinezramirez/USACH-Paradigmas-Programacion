@@ -1,5 +1,7 @@
 package org.usach.template;
 
+import org.usach.template.Constants.MenuOption;
+import org.usach.template.Constants.Text;
 import org.usach.template.TDA.Menu;
 
 import java.util.Scanner;
@@ -9,24 +11,24 @@ import static java.lang.System.exit;
 public class Main {
     public static void main(String[] args) {
 
-        var mainMenu = new Menu(TextConstants.MAIN_MENU_DIALOG);
+        var mainMenu = new Menu(Text.MAIN_MENU_DIALOG);
 
-        while (mainMenu.getSelectedOption() != MenuOptionConstants.MAIN_MENU_EXIT_OPTION) {
+        while (mainMenu.getSelectedOption() != MenuOption.MAIN_MENU_EXIT_OPTION) {
 
             mainMenu.printContextualDialog();
             var keyboardIn = new Scanner(System.in);
             mainMenu.setSelectedOption(keyboardIn.nextInt());
 
             switch (mainMenu.getSelectedOption()) {
-                case MenuOptionConstants.MAIN_MENU_SUM_OPTION:
+                case MenuOption.MAIN_MENU_SUM_OPTION:
                     sumTwoNumbers(keyboardIn);
-                    mainMenu.setSelectedOption(MenuOptionConstants.MAIN_MENU_DEFAULT_OPTION);
+                    mainMenu.setSelectedOption(MenuOption.MAIN_MENU_DEFAULT_OPTION);
                     break;
-                case MenuOptionConstants.MAIN_MENU_MULT_OPTION:
+                case MenuOption.MAIN_MENU_MULT_OPTION:
                     multTwoNumbers(keyboardIn);
-                    mainMenu.setSelectedOption(MenuOptionConstants.MAIN_MENU_DEFAULT_OPTION);
+                    mainMenu.setSelectedOption(MenuOption.MAIN_MENU_DEFAULT_OPTION);
                     break;
-                case MenuOptionConstants.MAIN_MENU_EXIT_OPTION:
+                case MenuOption.MAIN_MENU_EXIT_OPTION:
                     exit(0);
                 default:
                     System.out.println("Ingrese opcion correcta");
