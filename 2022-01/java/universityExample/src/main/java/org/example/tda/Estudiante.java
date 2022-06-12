@@ -48,6 +48,7 @@ public class Estudiante implements Comparable<Estudiante> {
         // if current object is greater,then return 1
         // if current object is greater,then return -1
         // if current object is equal to o,then return 0
+        // El retorno es ordenar de forma ascendente, es decir, promedios de menor a mayor
         return Integer.compare(this.promedio, o.promedio);
 
         //otra forma

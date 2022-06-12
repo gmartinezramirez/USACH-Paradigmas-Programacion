@@ -45,7 +45,7 @@ public class VistaEstudiantes {
 
     private void opcionMostrarEstudiantesOrdenados(List<Estudiante> estudiantes) {
         System.out.println("Ha seleccionado la opcion 1: Ordenar estudiantes por promedio e imprimir");
-        VistaEstudiantesOperaciones.mostrarEstudiantesSortByPromedio(estudiantes);
+        VistaEstudiantesOperaciones.sortEstudiantesByPromedio(estudiantes);
     }
 
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class VistaEstudiantesOperaciones {
 
-    public static void mostrarEstudiantesSortByPromedio(List<Estudiante> estudiantes) {
+    public static void sortEstudiantesByPromedio(List<Estudiante> estudiantes) {
         Collections.sort(estudiantes); // Ordena estudiantes por el método comparator
         System.out.println(estudiantes);
     }
